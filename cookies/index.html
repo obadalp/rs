@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zásady cookies | Regulatorní sandboxy</title>
+<meta name="description" content="Informace o používání cookies na webu regulatornisandboxy.cz — co ukládáme, proč a jak to spravovat."/>
+<meta name="theme-color" content="#38432a"/>
+<link rel="canonical" href="https://regulatornisandboxy.cz/cookies/"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Noto+Serif:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-container":"#4f5a40","secondary-fixed-dim":"#b5d17b",background:"#fbf9f8",secondary:"#4f661d","on-primary-container":"#c4d1b0","surface-container":"#f0eded","on-surface-variant":"#45483f","on-surface":"#1b1c1c","on-background":"#1b1c1c","surface-container-low":"#f6f3f2","primary-fixed-dim":"#bfcbab","secondary-container":"#ceea92","on-primary":"#ffffff",primary:"#38432a","surface":"#fbf9f8",outline:"#76786f","outline-variant":"#c6c7bc"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},fontFamily:{headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Inter"]}}}}</script>
+
+<style>
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+:root{--green:#849753;--green-dark:#6b7d41;--green-deep:#4a5a2e;--ink:#1a1c18;--ink-2:#3a3d35;--line:#e5e4dc}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:background .3s,padding .3s,box-shadow .3s}
+.site-header.scrolled,.site-header--solid{background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 var(--line);padding:12px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;max-width:1240px;margin:0 auto;padding:0 32px}
+.brand{flex-shrink:0;display:inline-flex;align-items:center;text-decoration:none}
+.brand-mark{font-weight:600;font-size:17px;color:var(--ink)}
+.nav{display:flex;align-items:center;gap:28px;margin-left:auto}
+.nav a{color:var(--ink-2);font-size:14.5px;font-weight:500;transition:color .2s;text-decoration:none}
+.nav a:hover{color:var(--green-deep)}
+.menu-btn{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:auto;z-index:101}
+.menu-btn span{display:block;width:26px;height:2px;background:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:2px;font-weight:500;font-size:14.5px;border:1px solid transparent;cursor:pointer;transition:background .2s;text-decoration:none;font-family:inherit}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-dark)}
+@media(max-width:960px){.nav{position:fixed;top:0;right:-100%;background:#fff;flex-direction:column;padding:100px 40px 40px;width:280px;height:100vh;box-shadow:-10px 0 40px rgba(0,0,0,.12);transition:right .32s ease}.nav.open{right:0}.nav a{font-size:18px;padding:12px 0}.menu-btn{display:flex}}
+
+.legal{max-width:780px;margin:0 auto}
+.legal h2{font-family:'Noto Serif',serif;font-style:italic;font-size:1.75rem;color:#38432a;margin:2.5rem 0 1rem;font-weight:400}
+.legal h3{font-size:1.125rem;color:#38432a;margin:1.75rem 0 .75rem;font-weight:700}
+.legal p{color:#1b1c1c;line-height:1.7;margin-bottom:1rem;font-size:16px}
+.legal ul,.legal ol{margin:0 0 1.25rem 1.5rem;line-height:1.7;color:#1b1c1c}
+.legal li{margin-bottom:.4rem}
+.legal a{color:#38432a;text-decoration:underline;text-underline-offset:3px}
+.legal strong{color:#38432a}
+.legal .todo{background:#fff8e1;border-left:4px solid #ffc107;padding:12px 16px;margin:1rem 0;border-radius:4px;font-size:14px;color:#5c4d20}
+.legal .todo strong{color:#2a2a2a}
+.cookie-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:14px}
+.cookie-table th,.cookie-table td{border:1px solid #e4e2e1;padding:10px 12px;text-align:left;vertical-align:top}
+.cookie-table th{background:#f6f3f2;font-weight:700;color:#38432a}
+.cookie-table tr:nth-child(even){background:#fbf9f8}
+.btn-manage{display:inline-flex;align-items:center;gap:8px;background:#38432a;color:#fff;padding:10px 20px;border-radius:8px;font-weight:600;font-size:14px;border:0;cursor:pointer}
+.btn-manage:hover{background:#4f661d}
+</style>
+</head>
+<body class="bg-background text-on-surface" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
+
+<!-- HEADER -->
+<header class="site-header site-header--solid">
+  <div class="header-inner">
+    <a href="../" class="brand"><span class="brand-mark">Regulatorní sandboxy</span></a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a href="../#sandbox">Sandbox</a>
+      <a href="../#typy">Typy</a>
+      <a href="../#metodika">Metodika</a>
+      <a href="../#osa">Průběh</a>
+      <a href="../#partneri">Partneři</a>
+      <a href="../priklady-ze-zahranici/">Příklady</a>
+      <a href="../clanky/">Články</a>
+      <a href="../faq/">FAQ</a>
+      <a href="../#kontakt" class="btn btn-sm btn-primary">Kontakt</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-16 relative overflow-hidden isolate" style="min-height:280px">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#2b3a1a] via-[#4a5a2e] to-[#6b7d41]"></div>
+  <div class="absolute inset-0 -z-10 opacity-50 mix-blend-luminosity" style="background:url(../img/hero-bg.png) center/cover no-repeat"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(20,26,12,.7)] to-[rgba(20,26,12,.3)]"></div>
+  <div class="max-w-[1240px] mx-auto relative">
+    <nav aria-label="Drobečková navigace" class="text-xs text-white/60 mb-6">
+      <a href="../" class="hover:text-white/90">Úvod</a>
+      <span class="mx-2">/</span>
+      <span class="text-white/80">Cookies</span>
+    </nav>
+    <span class="font-label text-white/70 uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Právní informace</span>
+    <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl mb-4 italic max-w-4xl leading-[1.05] text-white">Zásady používání cookies</h1>
+  </div>
+</section>
+
+<!-- HLAVNÍ OBSAH -->
+<main class="py-12 md:py-16 px-6 md:px-16">
+  <article class="legal">
+
+    <div class="todo">
+      <strong>Poznámka pro autory:</strong> Seznam cookies níže je vzorový. Skutečné cookies doplňte podle nasazených nástrojů (Google Analytics, Plausible, Matomo, atd.). Pokud žádné analytické nástroje nepoužíváte, sekci „Analytické cookies" smažte.
+    </div>
+
+    <h2>Co jsou cookies?</h2>
+    <p>Cookies jsou malé textové soubory, které webová stránka ukládá do&nbsp;vašeho prohlížeče. Slouží například k&nbsp;zapamatování vašich preferencí, anonymní analýze návštěvnosti nebo zajištění základních funkcí webu.</p>
+
+    <h2>Jaké cookies používáme</h2>
+
+    <h3>🔒 Nezbytné cookies (nevyžadují souhlas)</h3>
+    <p>Tyto cookies jsou potřeba k&nbsp;fungování webu a&nbsp;nelze je vypnout.</p>
+    <table class="cookie-table">
+      <thead><tr><th>Název</th><th>Účel</th><th>Doba platnosti</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><code>rs-cookies-v1</code></td>
+          <td>Ukládá vaše rozhodnutí o&nbsp;cookies banneru (souhlas / odmítnutí)</td>
+          <td>1&nbsp;rok (localStorage)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>📊 Analytické cookies (vyžadují souhlas)</h3>
+    <p><em>Pokud udělíte souhlas přes cookie banner. Pomáhají nám zjistit, jak se&nbsp;web používá — anonymizovaně.</em></p>
+    <table class="cookie-table">
+      <thead><tr><th>Název</th><th>Poskytovatel</th><th>Účel</th><th>Platnost</th></tr></thead>
+      <tbody>
+        <tr>
+          <td colspan="4" style="text-align:center;color:#76786f;font-style:italic">— Analytické nástroje aktuálně nejsou nasazeny —</td>
+        </tr>
+        <!-- Až nasadíte GA/Plausible, přidejte řádek sem, např:
+        <tr>
+          <td>_ga, _ga_XXX</td>
+          <td>Google Analytics</td>
+          <td>Anonymní analýza návštěvnosti</td>
+          <td>2 roky</td>
+        </tr>
+        -->
+      </tbody>
+    </table>
+
+    <h2>Jak spravovat cookies</h2>
+
+    <h3>Na tomto webu</h3>
+    <p>Své rozhodnutí o&nbsp;cookies můžete kdykoliv změnit kliknutím na&nbsp;tlačítko níže:</p>
+    <p><button class="btn-manage" id="reset-cookies" type="button"><span class="material-symbols-outlined" style="font-size:18px">refresh</span> Znovu zobrazit cookie banner</button></p>
+
+    <h3>V prohlížeči</h3>
+    <p>Cookies můžete smazat nebo blokovat v&nbsp;nastavení prohlížeče:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Chrome</a></li>
+      <li><a href="https://support.mozilla.org/cs/kb/vymazani-cookies-webovych-stranek" target="_blank" rel="noopener">Firefox</a></li>
+      <li><a href="https://support.apple.com/cs-cz/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+      <li><a href="https://support.microsoft.com/cs-cz/microsoft-edge/vymaz%C3%A1n%C3%AD-souboru-cookie-v-microsoft-edgei-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Edge</a></li>
+    </ul>
+
+    <h2>Kontakt</h2>
+    <p>Máte-li dotaz týkající se&nbsp;cookies nebo ochrany osobních údajů, napište nám na&nbsp;<a href="mailto:gdpr@aqe.cz">gdpr@aqe.cz</a>. Podrobnější informace o&nbsp;zpracování osobních údajů najdete v&nbsp;<a href="../ochrana-osobnich-udaju/">Zásadách ochrany osobních údajů</a>.</p>
+
+    <p class="mt-10 pt-6 border-t border-outline-variant/20 text-sm text-outline">Poslední aktualizace: <strong>1.&nbsp;4.&nbsp;2026</strong></p>
+  </article>
+</main>
+
+<footer class="bg-[#f0eded] w-full border-t border-primary/10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-12 py-12 md:py-16 max-w-screen-2xl mx-auto">
+<div>
+<div class="font-serif italic text-xl text-primary mb-2">regulatornisandboxy.cz</div>
+<p class="text-sm text-on-surface-variant"><a href="https://www.aqe.cz" target="_blank" rel="noopener" class="text-primary font-semibold no-underline hover:underline">AQE advisors, a.s.</a> · IČO: 26954770 · <span id="footer-year">2026</span></p>
+<p class="text-xs text-outline mt-2">Projekt Vl:Aštovka (CZ.03.03.01/23_057/0006345) je financován z&nbsp;Operačního programu Zaměstnanost plus (OPZ+).</p>
+</div>
+<div class="flex gap-6 md:justify-end items-center flex-wrap">
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../priklady-ze-zahranici/">Příklady</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../clanky/">Články</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../faq/">FAQ</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../legislativa/">Legislativa</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../#kontakt">Kontakt</a>
+</div>
+</div>
+<script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</footer>
+
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
+<script>
+(function(){var btn=document.querySelector('.menu-btn');var nav=document.querySelector('.nav');if(btn&&nav){btn.addEventListener('click',function(){nav.classList.toggle('open');btn.setAttribute('aria-expanded',nav.classList.contains('open')?'true':'false')})}})();
+(function(){
+  var btn=document.getElementById('reset-cookies');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    try{localStorage.removeItem('rs-cookies-v1')}catch(e){}
+    alert('Cookie preference byla resetována. Po návratu na hlavní stránku se vám znovu zobrazí banner.');
+  });
+})();
+</script>
+
+</body>
+</html>

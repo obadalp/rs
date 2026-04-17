@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Preview palet a vizuálních prvků | Regulatorní sandboxy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Noto+Serif:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1b1c1c;background:#fbf9f8;line-height:1.5}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+
+/* Wrapper */
+.preview-wrap{max-width:1400px;margin:0 auto;padding:40px 24px}
+.preview-intro{text-align:center;padding:40px 0 60px}
+.preview-intro h1{font-family:'Noto Serif',serif;font-style:italic;font-size:clamp(32px,5vw,56px);color:#38432a;margin-bottom:12px;font-weight:400}
+.preview-intro p{color:#45483f;max-width:600px;margin:0 auto;font-size:17px}
+.preview-intro small{display:block;margin-top:16px;color:#76786f;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+
+/* Palette demo block */
+.palette-demo{border-radius:16px;overflow:hidden;margin-bottom:60px;box-shadow:0 10px 30px rgba(26,28,24,.05);border:1px solid rgba(118,120,111,.12)}
+.palette-label{padding:14px 28px;font-family:'Noto Serif',serif;font-style:italic;font-size:22px;letter-spacing:-.01em;border-bottom:1px solid rgba(118,120,111,.12);display:flex;justify-content:space-between;align-items:center;background:#fbf9f8}
+.palette-label .tag{font-family:'Plus Jakarta Sans',sans-serif;font-style:normal;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:999px}
+
+/* Swatches */
+.swatches{display:flex;gap:10px;padding:20px 28px;background:#fbf9f8;flex-wrap:wrap}
+.swatch{display:flex;flex-direction:column;gap:4px;font-size:11px;color:#76786f}
+.swatch-color{width:60px;height:48px;border-radius:6px;border:1px solid rgba(0,0,0,.06)}
+.swatch-hex{font-family:monospace;font-size:10px;color:#45483f}
+
+/* Demo content section — will be restyled per variant */
+.demo{padding:48px 28px;position:relative;overflow:hidden}
+
+/* Hero header */
+.demo-hero{padding:48px 28px 40px;position:relative;overflow:hidden}
+.demo-hero-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.demo-hero h2{font-family:'Noto Serif',serif;font-style:italic;font-size:clamp(28px,4vw,44px);line-height:1.05;margin-bottom:14px;font-weight:400}
+.demo-hero p{font-size:16px;max-width:560px;line-height:1.6}
+
+/* Card with icon in colored circle */
+.demo-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:32px 28px}
+.demo-card{background:#fff;border:1px solid rgba(118,120,111,.12);border-radius:12px;padding:24px;transition:transform .3s ease,box-shadow .3s ease}
+.demo-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,28,24,.08)}
+.icon-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.icon-circle .material-symbols-outlined{font-size:28px}
+.demo-card h3{font-family:'Noto Serif',serif;font-style:italic;font-size:18px;margin-bottom:8px;font-weight:400}
+.demo-card p{font-size:14px;color:#45483f;line-height:1.55}
+
+/* Pullquote */
+.demo-quote{padding:40px 28px;display:flex;gap:24px;align-items:flex-start}
+.demo-quote .q-mark{font-family:'Fraunces',serif;font-size:100px;line-height:.6;opacity:.2;font-weight:600;flex-shrink:0}
+.demo-quote blockquote{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(20px,2.2vw,30px);line-height:1.3;color:#1b1c1c;max-width:780px;font-weight:400}
+.demo-quote cite{display:block;margin-top:14px;font-style:normal;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#76786f;font-weight:600;font-weight:600}
+
+/* Decorative SVG — placement varies per variant */
+.deco{position:absolute;pointer-events:none}
+
+/* Subtle pattern overlay */
+.pattern-overlay{position:absolute;inset:0;pointer-events:none;opacity:.35}
+
+/* CTA button */
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-weight:600;font-size:14.5px;border:0;cursor:pointer;text-decoration:none;transition:all .25s ease;margin-top:20px}
+
+/* ============================================================
+   VARIANTA A — FRESH ZELENÁ
+   Světlé pozadí, krém, jasnější akcent zelená
+   ============================================================ */
+.variant-fresh .demo-hero{background:linear-gradient(135deg,#eef5df 0%,#faf7f1 100%);color:#38432a}
+.variant-fresh .demo-hero-eyebrow{color:#4f661d}
+.variant-fresh .demo-hero h2{color:#38432a}
+.variant-fresh .demo-hero p{color:#45483f}
+.variant-fresh .cta-btn{background:#4f661d;color:#fff}
+.variant-fresh .cta-btn:hover{background:#38432a}
+.variant-fresh .demo-cards{background:#faf7f1}
+.variant-fresh .icon-circle{background:#d1ed94;color:#38432a}
+.variant-fresh .demo-card h3{color:#38432a}
+.variant-fresh .demo-quote{background:#fff;border-top:1px solid rgba(118,120,111,.1);border-bottom:1px solid rgba(118,120,111,.1)}
+.variant-fresh .demo-quote .q-mark{color:#849753}
+.variant-fresh .demo-quote blockquote{color:#38432a}
+.variant-fresh .palette-label{color:#38432a;background:#eef5df}
+.variant-fresh .palette-label .tag{background:#38432a;color:#d1ed94}
+.variant-fresh .pattern-overlay{background-image:radial-gradient(circle,#849753 1px,transparent 1px);background-size:24px 24px;opacity:.15}
+.variant-fresh .deco{width:200px;height:200px;right:-40px;top:-40px;color:#b5d17b;opacity:.5}
+
+/* ============================================================
+   VARIANTA B — AMBER AKCENT
+   Zelená + teplá amber pro CTA a highlight
+   ============================================================ */
+.variant-amber .demo-hero{background:linear-gradient(135deg,#faf3e6 0%,#fbf7f0 100%);color:#38432a}
+.variant-amber .demo-hero-eyebrow{color:#b8854d;font-weight:700}
+.variant-amber .demo-hero h2{color:#38432a}
+.variant-amber .demo-hero p{color:#45483f}
+.variant-amber .cta-btn{background:#d4a574;color:#38432a}
+.variant-amber .cta-btn:hover{background:#b8854d;color:#fff}
+.variant-amber .demo-cards{background:#fbf7f0}
+.variant-amber .icon-circle{background:#fde8c7;color:#b8854d}
+.variant-amber .demo-card h3{color:#38432a}
+.variant-amber .demo-quote{background:#fff;border-top:4px solid #d4a574}
+.variant-amber .demo-quote .q-mark{color:#d4a574}
+.variant-amber .demo-quote blockquote{color:#38432a}
+.variant-amber .palette-label{color:#38432a;background:#faf3e6}
+.variant-amber .palette-label .tag{background:#d4a574;color:#38432a}
+.variant-amber .pattern-overlay{background:repeating-linear-gradient(45deg,transparent,transparent 12px,rgba(212,165,116,.06) 12px,rgba(212,165,116,.06) 13px)}
+.variant-amber .deco{width:220px;height:220px;right:-50px;bottom:-50px;color:#d4a574;opacity:.25}
+
+/* ============================================================
+   VARIANTA C — DVOJÍ AKCENT (zelená + korálová)
+   ============================================================ */
+.variant-koral .demo-hero{background:linear-gradient(135deg,#fbecd9 0%,#fbf7f0 60%,#f9ebe3 100%);color:#38432a;position:relative}
+.variant-koral .demo-hero-eyebrow{color:#d16d4f;font-weight:700}
+.variant-koral .demo-hero h2{color:#38432a}
+.variant-koral .demo-hero p{color:#45483f}
+.variant-koral .cta-btn{background:#e88b6d;color:#fff;box-shadow:0 4px 16px rgba(232,139,109,.3)}
+.variant-koral .cta-btn:hover{background:#d16d4f}
+.variant-koral .demo-cards{background:#fbf9f8}
+.variant-koral .demo-card:nth-child(1) .icon-circle{background:#fde0d5;color:#d16d4f}
+.variant-koral .demo-card:nth-child(2) .icon-circle{background:#d1ed94;color:#38432a}
+.variant-koral .demo-card:nth-child(3) .icon-circle{background:#fde0d5;color:#d16d4f}
+.variant-koral .demo-card h3{color:#38432a}
+.variant-koral .demo-quote{background:linear-gradient(135deg,#fff 0%,#faf7f1 100%);border-left:5px solid #e88b6d}
+.variant-koral .demo-quote .q-mark{color:#e88b6d}
+.variant-koral .demo-quote blockquote{color:#38432a}
+.variant-koral .palette-label{color:#38432a;background:#fde0d5}
+.variant-koral .palette-label .tag{background:#e88b6d;color:#fff}
+.variant-koral .pattern-overlay{background-image:radial-gradient(circle at 2px 2px,#e88b6d 0.8px,transparent 0.8px);background-size:22px 22px;opacity:.15}
+.variant-koral .deco{width:240px;height:240px;right:20px;bottom:-80px;color:#e88b6d;opacity:.15}
+
+/* Footer nav */
+.back-link{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;background:#38432a;color:#fff;text-decoration:none;font-size:13px;font-weight:600;margin-top:40px;transition:background .2s ease}
+.back-link:hover{background:#4f661d}
+
+@media(max-width:720px){
+.demo-quote{flex-direction:column}
+.demo-quote .q-mark{font-size:60px}
+.swatch-color{width:48px;height:40px}
+}
+</style>
+</head>
+<body>
+
+<div class="preview-wrap">
+
+  <header class="preview-intro">
+    <small>Preview</small>
+    <h1>Barevné varianty + vizuální prvky</h1>
+    <p>Porovnání tří navržených palet, každá se všemi diskutovanými vizuálními prvky: jemný pattern v pozadí, ikony v barevných kolečkách, dekorativní SVG ilustrace a pullquote s výraznou typografií.</p>
+  </header>
+
+  <!-- =========================================================
+       VARIANTA A — FRESH ZELENÁ
+       ========================================================= -->
+  <section class="palette-demo variant-fresh">
+    <div class="palette-label">Varianta A — Fresh zelená <span class="tag">Bezpečný upgrade</span></div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color" style="background:#38432a"></div><span class="swatch-hex">#38432a</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#4f661d"></div><span class="swatch-hex">#4f661d</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#849753"></div><span class="swatch-hex">#849753</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#b5d17b"></div><span class="swatch-hex">#b5d17b</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d1ed94"></div><span class="swatch-hex">#d1ed94</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#eef5df"></div><span class="swatch-hex">#eef5df</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#faf7f1"></div><span class="swatch-hex">#faf7f1</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fff"></div><span class="swatch-hex">#ffffff</span></div>
+    </div>
+
+    <!-- Hero section -->
+    <div class="demo-hero">
+      <div class="pattern-overlay"></div>
+      <svg class="deco" viewBox="0 0 200 200" fill="currentColor">
+        <path d="M50,100 Q100,20 150,100 T250,100" stroke="currentColor" stroke-width="3" fill="none" opacity=".4"/>
+        <circle cx="140" cy="60" r="30" opacity=".3"/>
+        <circle cx="50" cy="140" r="20" opacity=".5"/>
+      </svg>
+      <div class="demo-hero-eyebrow">Základní koncept</div>
+      <h2>Co je regulační prostředí?</h2>
+      <p>Časově omezené testovací prostředí, ve kterém lze pod dohledem regulátora zkoušet inovativní řešení.</p>
+      <a href="#" class="cta-btn">Zjistit víc →</a>
+    </div>
+
+    <!-- Cards with icon circles -->
+    <div class="demo-cards">
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">gavel</span></div>
+        <h3>Regulátor</h3>
+        <p>Ústřední správní úřad, který sandbox zřizuje a&nbsp;stanovuje podmínky.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">lightbulb</span></div>
+        <h3>Inovátor</h3>
+        <p>Organizace přicházející s&nbsp;podnětem k&nbsp;testování řešení.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">groups</span></div>
+        <h3>Účastníci</h3>
+        <p>Lidé a&nbsp;komunity, kterých se testované řešení přímo dotýká.</p>
+      </div>
+    </div>
+
+    <!-- Pullquote -->
+    <div class="demo-quote">
+      <div class="q-mark">"</div>
+      <div>
+        <blockquote>Bez regulatorního učení nemá sandbox smysl — testuje se pro testování.</blockquote>
+        <cite>Metodický rámec Vl:Aštovka</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VARIANTA B — AMBER AKCENT
+       ========================================================= -->
+  <section class="palette-demo variant-amber">
+    <div class="palette-label">Varianta B — Amber akcent <span class="tag">Teplejší / energičtější</span></div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color" style="background:#38432a"></div><span class="swatch-hex">#38432a</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#849753"></div><span class="swatch-hex">#849753</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#b8854d"></div><span class="swatch-hex">#b8854d</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d4a574"></div><span class="swatch-hex">#d4a574</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fde8c7"></div><span class="swatch-hex">#fde8c7</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#faf3e6"></div><span class="swatch-hex">#faf3e6</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fbf7f0"></div><span class="swatch-hex">#fbf7f0</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fff"></div><span class="swatch-hex">#ffffff</span></div>
+    </div>
+
+    <div class="demo-hero">
+      <div class="pattern-overlay"></div>
+      <svg class="deco" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="100" cy="100" r="70" opacity=".3"/>
+        <circle cx="100" cy="100" r="50" opacity=".4"/>
+        <circle cx="100" cy="100" r="30" opacity=".5"/>
+        <circle cx="100" cy="100" r="10" fill="currentColor" stroke="none" opacity=".4"/>
+      </svg>
+      <div class="demo-hero-eyebrow">Základní koncept</div>
+      <h2>Co je regulační prostředí?</h2>
+      <p>Časově omezené testovací prostředí, ve kterém lze pod dohledem regulátora zkoušet inovativní řešení.</p>
+      <a href="#" class="cta-btn">Zjistit víc →</a>
+    </div>
+
+    <div class="demo-cards">
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">gavel</span></div>
+        <h3>Regulátor</h3>
+        <p>Ústřední správní úřad, který sandbox zřizuje a&nbsp;stanovuje podmínky.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">lightbulb</span></div>
+        <h3>Inovátor</h3>
+        <p>Organizace přicházející s&nbsp;podnětem k&nbsp;testování řešení.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">groups</span></div>
+        <h3>Účastníci</h3>
+        <p>Lidé a&nbsp;komunity, kterých se testované řešení přímo dotýká.</p>
+      </div>
+    </div>
+
+    <div class="demo-quote">
+      <div class="q-mark">"</div>
+      <div>
+        <blockquote>Bez regulatorního učení nemá sandbox smysl — testuje se pro testování.</blockquote>
+        <cite>Metodický rámec Vl:Aštovka</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       VARIANTA C — DVOJÍ AKCENT (zelená + korálová)
+       ========================================================= -->
+  <section class="palette-demo variant-koral">
+    <div class="palette-label">Varianta C — Dvojí akcent (zelená + korálová) <span class="tag">Max kontrast</span></div>
+    <div class="swatches">
+      <div class="swatch"><div class="swatch-color" style="background:#38432a"></div><span class="swatch-hex">#38432a</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#849753"></div><span class="swatch-hex">#849753</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d1ed94"></div><span class="swatch-hex">#d1ed94</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#d16d4f"></div><span class="swatch-hex">#d16d4f</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#e88b6d"></div><span class="swatch-hex">#e88b6d</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fde0d5"></div><span class="swatch-hex">#fde0d5</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#faf7f1"></div><span class="swatch-hex">#faf7f1</span></div>
+      <div class="swatch"><div class="swatch-color" style="background:#fff"></div><span class="swatch-hex">#ffffff</span></div>
+    </div>
+
+    <div class="demo-hero">
+      <div class="pattern-overlay"></div>
+      <svg class="deco" viewBox="0 0 200 200" fill="currentColor">
+        <path d="M40,100 C40,50 100,30 130,60 C160,90 120,140 80,140 C50,140 40,120 40,100 Z" opacity=".25"/>
+        <path d="M150,50 Q170,90 150,130 Q130,170 90,170" fill="none" stroke="currentColor" stroke-width="3" opacity=".4"/>
+      </svg>
+      <div class="demo-hero-eyebrow">Základní koncept</div>
+      <h2>Co je regulační prostředí?</h2>
+      <p>Časově omezené testovací prostředí, ve kterém lze pod dohledem regulátora zkoušet inovativní řešení.</p>
+      <a href="#" class="cta-btn">Zjistit víc →</a>
+    </div>
+
+    <div class="demo-cards">
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">gavel</span></div>
+        <h3>Regulátor</h3>
+        <p>Ústřední správní úřad, který sandbox zřizuje a&nbsp;stanovuje podmínky.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">lightbulb</span></div>
+        <h3>Inovátor</h3>
+        <p>Organizace přicházející s&nbsp;podnětem k&nbsp;testování řešení.</p>
+      </div>
+      <div class="demo-card">
+        <div class="icon-circle"><span class="material-symbols-outlined">groups</span></div>
+        <h3>Účastníci</h3>
+        <p>Lidé a&nbsp;komunity, kterých se testované řešení přímo dotýká.</p>
+      </div>
+    </div>
+
+    <div class="demo-quote">
+      <div class="q-mark">"</div>
+      <div>
+        <blockquote>Bez regulatorního učení nemá sandbox smysl — testuje se pro testování.</blockquote>
+        <cite>Metodický rámec Vl:Aštovka</cite>
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center">
+    <a href="../" class="back-link"><span class="material-symbols-outlined">arrow_back</span> Zpět na hlavní stránku</a>
+  </div>
+
+</div>
+
+</body>
+</html>

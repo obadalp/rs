@@ -56,6 +56,47 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .nav a{font-size:18px;padding:12px 0}
 .menu-btn{display:flex}
 }
+
+/* ===== GLOBAL UX/UI ENHANCEMENTS ===== */
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal:nth-child(2){transition-delay:.05s}
+.reveal:nth-child(3){transition-delay:.1s}
+.reveal:nth-child(4){transition-delay:.15s}
+.reveal:nth-child(5){transition-delay:.2s}
+.reveal:nth-child(6){transition-delay:.25s}
+.reveal:nth-child(7){transition-delay:.3s}
+.reveal:nth-child(8){transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Enhanced card hover — subtle tilt + glow */
+.card-hover{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .25s ease}
+.card-hover:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 40px rgba(26,28,24,.09),0 4px 12px rgba(26,28,24,.04)}
+
+/* Smooth chevron rotation on accordions already works via .acc-arrow */
+details[open] > summary > .acc-arrow{color:#38432a}
+
+/* Button press feedback */
+button:active,a:active{transform:scale(.98)}
+button,a{transition:transform .15s ease}
+
+/* Link underline animation */
+a.link-animated{position:relative;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s}
+a.link-animated:hover{background-size:100% 1px}
+
+/* Subtle page-header float */
+.hero-shine{position:absolute;inset:0;background:radial-gradient(800px circle at var(--x,50%) var(--y,50%),rgba(255,255,255,.08) 0%,transparent 50%);pointer-events:none;transition:opacity .5s ease}
+
+/* Nav active state underline */
+.nav a[aria-current="page"]{position:relative}
+.nav a[aria-current="page"]::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:#38432a;border-radius:2px;transform-origin:left center;animation:slideIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes slideIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Shine effect on category badges */
+.cat-btn{position:relative;overflow:hidden}
+.cat-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s ease}
+.cat-btn:hover::after{left:100%}
 </style>
 </head>
 <body class="bg-background text-on-surface font-body" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
@@ -104,7 +145,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="max-w-[1240px] mx-auto">
 
     <!-- ===== VARIANTA C: Záložky ===== -->
-    <div class="flex gap-1 mb-10 border-b border-outline-variant/20" id="leg-tabs">
+    <div class="flex gap-1 mb-10 border-b border-outline-variant/20 reveal" id="leg-tabs">
       <button data-leg="cesko" class="leg-tab leg-tab--active px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Česká legislativa</button>
       <button data-leg="eu" class="leg-tab px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Mezinárodní rámce</button>
       <button data-leg="akteri" class="leg-tab px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Aktéři</button>
@@ -112,7 +153,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 
     <div class="leg-panel" data-panel="cesko">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-surface p-8 rounded-xl border-l-4 border-primary">
+        <div class="bg-surface p-8 rounded-xl border-l-4 border-primary reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl">gavel</span>
             <h3 class="font-headline text-xl italic text-primary">Zákon 328/2025 Sb.</h3>
@@ -126,7 +167,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
             </div>
           </details>
         </div>
-        <div class="bg-surface p-8 rounded-xl border-l-4 border-secondary">
+        <div class="bg-surface p-8 rounded-xl border-l-4 border-secondary reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl">construction</span>
             <h3 class="font-headline text-xl italic text-primary">DEPO II</h3>
@@ -139,27 +180,27 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 
     <div class="leg-panel" data-panel="eu" style="display:none">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
           <span class="material-symbols-outlined text-secondary mb-3">smart_toy</span>
           <h3 class="font-semibold text-primary text-base mb-1">AI Act (č.&nbsp;2024/1689)</h3>
           <p class="text-on-surface-variant text-sm leading-relaxed">Komplexní rámec pro regulaci AI v&nbsp;EU. Povinné AI sandboxy do&nbsp;srpna 2026.</p>
         </div>
-        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
           <span class="material-symbols-outlined text-secondary mb-3">handshake</span>
           <h3 class="font-semibold text-primary text-base mb-1">Závěry Rady EU (2020)</h3>
           <p class="text-on-surface-variant text-sm leading-relaxed">Formální uznání sandboxů jako nástroje inovací na úrovni EU.</p>
         </div>
-        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
           <span class="material-symbols-outlined text-secondary mb-3">lan</span>
           <h3 class="font-semibold text-primary text-base mb-1">Interoperable Europe Act</h3>
           <p class="text-on-surface-variant text-sm leading-relaxed">Sandboxy pro interoperabilitu přeshraničních digitálních veřejných služeb.</p>
         </div>
-        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
           <span class="material-symbols-outlined text-secondary mb-3">medication</span>
           <h3 class="font-semibold text-primary text-base mb-1">Farmaceutický balíček EU</h3>
           <p class="text-on-surface-variant text-sm leading-relaxed">Sandbox pro vývoj a&nbsp;testování nových léčivých přípravků (2025).</p>
         </div>
-        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
           <span class="material-symbols-outlined text-secondary mb-3">science</span>
           <h3 class="font-semibold text-primary text-base mb-1">Joint Research Centre</h3>
           <p class="text-on-surface-variant text-sm leading-relaxed">Metodická podpora a&nbsp;doporučení pro zavádění sandboxů.</p>
@@ -169,28 +210,28 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 
     <div class="leg-panel" data-panel="akteri" style="display:none">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-primary text-on-primary p-8 rounded-xl">
+        <div class="bg-primary text-on-primary p-8 rounded-xl reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-2xl opacity-70">account_balance</span>
             <h3 class="font-headline text-xl italic">Regulátor</h3>
           </div>
           <p class="text-sm leading-relaxed opacity-85">Ústřední správní úřad, který sandbox zřizuje, stanovuje podmínky, dohlíží a&nbsp;vyhodnocuje. V&nbsp;ČR je to 14 ministerstev a&nbsp;17 dalších ústředních orgánů.</p>
         </div>
-        <div class="bg-primary text-on-primary p-8 rounded-xl">
+        <div class="bg-primary text-on-primary p-8 rounded-xl reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-2xl opacity-70">lightbulb</span>
             <h3 class="font-headline text-xl italic">Předkladatel / Inovátor</h3>
           </div>
           <p class="text-sm leading-relaxed opacity-85">Výzkumná organizace, firma, NNO nebo samospráva, která přichází s&nbsp;podnětem k&nbsp;testování nového řešení.</p>
         </div>
-        <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl">groups</span>
             <h3 class="font-headline text-xl italic text-primary">Účastníci testování</h3>
           </div>
           <p class="text-on-surface-variant text-sm leading-relaxed">Lidé, komunity nebo organizace, kterých se testované řešení přímo dotýká.</p>
         </div>
-        <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10">
+        <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 reveal">
           <div class="flex items-center gap-3 mb-4">
             <span class="material-symbols-outlined text-secondary text-2xl">support_agent</span>
             <h3 class="font-headline text-xl italic text-primary">Podpora a&nbsp;koordinace</h3>
@@ -243,6 +284,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 <script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
 </footer>
 
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
 <script>
 (function(){
   var btn=document.querySelector('.menu-btn');
@@ -255,5 +309,26 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 })();
 </script>
 
+
+<!-- Scroll reveal + micro-interactions -->
+<script>
+(function(){
+  // Scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && els.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  } else {
+    els.forEach(function(e){e.classList.add('in');});
+  }
+})();
+</script>
 </body>
 </html>

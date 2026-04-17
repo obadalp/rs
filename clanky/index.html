@@ -62,10 +62,12 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 }
 
 /* Karta článku */
-.article-card{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid rgba(118,120,111,.15);border-radius:.5rem;overflow:hidden;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
-.article-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(26,28,24,.08);border-color:rgba(56,67,42,.3)}
+.article-card{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid rgba(118,120,111,.15);border-radius:.5rem;overflow:hidden;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1),border-color .3s ease}
+.article-card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(26,28,24,.1),0 4px 12px rgba(26,28,24,.05);border-color:rgba(56,67,42,.35)}
 .article-card__thumb{aspect-ratio:16/9;background:linear-gradient(135deg,#dbe7c5 0%,#bfcbab 100%);display:flex;align-items:center;justify-content:center;color:#4a5a2e;position:relative;overflow:hidden}
-.article-card__thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.article-card__thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.12) 100%);opacity:0;transition:opacity .3s ease;pointer-events:none}
+.article-card:hover .article-card__thumb::after{opacity:1}
+.article-card__thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1)}
 .article-card:hover .article-card__thumb img{transform:scale(1.04)}
 .article-card__thumb .material-symbols-outlined{font-size:48px;opacity:.5}
 .article-card__body{padding:1.5rem 1.5rem 1.75rem;display:flex;flex-direction:column;flex:1}
@@ -80,6 +82,47 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .article-card__link:hover{color:#4f661d}
 .article-card__link .material-symbols-outlined{font-size:18px;transition:transform .25s ease}
 .article-card__link:hover .material-symbols-outlined{transform:translateX(4px)}
+
+/* ===== GLOBAL UX/UI ENHANCEMENTS ===== */
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal:nth-child(2){transition-delay:.05s}
+.reveal:nth-child(3){transition-delay:.1s}
+.reveal:nth-child(4){transition-delay:.15s}
+.reveal:nth-child(5){transition-delay:.2s}
+.reveal:nth-child(6){transition-delay:.25s}
+.reveal:nth-child(7){transition-delay:.3s}
+.reveal:nth-child(8){transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Enhanced card hover — subtle tilt + glow */
+.card-hover{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .25s ease}
+.card-hover:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 40px rgba(26,28,24,.09),0 4px 12px rgba(26,28,24,.04)}
+
+/* Smooth chevron rotation on accordions already works via .acc-arrow */
+details[open] > summary > .acc-arrow{color:#38432a}
+
+/* Button press feedback */
+button:active,a:active{transform:scale(.98)}
+button,a{transition:transform .15s ease}
+
+/* Link underline animation */
+a.link-animated{position:relative;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s}
+a.link-animated:hover{background-size:100% 1px}
+
+/* Subtle page-header float */
+.hero-shine{position:absolute;inset:0;background:radial-gradient(800px circle at var(--x,50%) var(--y,50%),rgba(255,255,255,.08) 0%,transparent 50%);pointer-events:none;transition:opacity .5s ease}
+
+/* Nav active state underline */
+.nav a[aria-current="page"]{position:relative}
+.nav a[aria-current="page"]::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:#38432a;border-radius:2px;transform-origin:left center;animation:slideIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes slideIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Shine effect on category badges */
+.cat-btn{position:relative;overflow:hidden}
+.cat-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s ease}
+.cat-btn:hover::after{left:100%}
 </style>
 </head>
 <body class="bg-background text-on-surface font-body" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
@@ -128,7 +171,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="max-w-[1240px] mx-auto">
 
     <!-- Filtry -->
-    <div class="flex flex-wrap gap-2 mb-10" id="cat-filters">
+    <div class="flex flex-wrap gap-2 mb-10 reveal" id="cat-filters">
       <button data-filter="all" class="cat-btn cat-btn--active px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors">Všechny</button>
       <button data-filter="Metodika" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors">Metodika</button>
       <button data-filter="Legislativa" class="cat-btn px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors">Legislativa</button>
@@ -140,7 +183,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
 
       <!-- ARTICLE 1 -->
-      <article class="article-card" data-category="Metodika">
+      <article class="article-card reveal" data-category="Metodika">
         <a href="experimentalni-ctvrt-jako-laborator-obnovy-mesta/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/experimentalni-inovativni-ctvrt-AI-gem.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -155,7 +198,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       </article>
 
       <!-- ARTICLE 2 -->
-      <article class="article-card" data-category="Vl:Aštovka">
+      <article class="article-card reveal" data-category="Vl:Aštovka">
         <a href="specialni-ekonomicke-zony-sance-nejen-pro-assko/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/moderni-tovarna-scaled.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -170,7 +213,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       </article>
 
       <!-- ARTICLE 3 -->
-      <article class="article-card" data-category="Metodika">
+      <article class="article-card reveal" data-category="Metodika">
         <a href="budoucnost-verejne-spravy-spociva-v-inovacich/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/verejna-sprava-inovace-scaled.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -185,7 +228,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       </article>
 
       <!-- ARTICLE 4 -->
-      <article class="article-card" data-category="Legislativa">
+      <article class="article-card reveal" data-category="Legislativa">
         <a href="regulatorni-sandboxy-proc-je-jeste-v-cesku-nemame/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/cesko-scaled.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -200,7 +243,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       </article>
 
       <!-- ARTICLE 5 -->
-      <article class="article-card" data-category="Metodika">
+      <article class="article-card reveal" data-category="Metodika">
         <a href="proc-je-nezbytne-delat-veci-jinak/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/strategie-sandbox-clanek_2-scaled.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -215,7 +258,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       </article>
 
       <!-- ARTICLE 6 -->
-      <article class="article-card" data-category="Zahraničí">
+      <article class="article-card reveal" data-category="Zahraničí">
         <a href="regulatorni-sandboxy-na-zapade-jako-doma-ale-maji-je-i-v-litve/" class="article-card__thumb-link">
           <div class="article-card__thumb">
             <img src="img/sandbox2-scaled.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
@@ -294,6 +337,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 <script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
 </footer>
 
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
 <script>
 (function(){
   var btn=document.querySelector('.menu-btn');
@@ -306,5 +362,26 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 })();
 </script>
 
+
+<!-- Scroll reveal + micro-interactions -->
+<script>
+(function(){
+  // Scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && els.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  } else {
+    els.forEach(function(e){e.classList.add('in');});
+  }
+})();
+</script>
 </body>
 </html>

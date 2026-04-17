@@ -89,4 +89,36 @@
   // Year in footer
   const yearEl = document.querySelector('[data-year]');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // ===== SCROLLSPY =====
+  // Watch which section is in view and highlight matching nav link.
+  const navLinks = Array.from(document.querySelectorAll('.nav a[href^="#"]'));
+  const sections = navLinks
+    .map(a => ({link: a, id: a.getAttribute('href').slice(1)}))
+    .filter(s => s.id.length > 0)
+    .map(s => ({link: s.link, el: document.getElementById(s.id)}))
+    .filter(s => s.el);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    // Track visibility ratios; pick the section with the highest ratio.
+    const ratios = new Map();
+    const spyIO = new IntersectionObserver((entries) => {
+      entries.forEach(e => ratios.set(e.target, e.intersectionRatio));
+      let bestEl = null;
+      let bestRatio = 0;
+      ratios.forEach((r, el) => {
+        if (r > bestRatio) { bestRatio = r; bestEl = el; }
+      });
+      navLinks.forEach(a => a.classList.remove('is-active'));
+      if (bestEl && bestRatio > 0) {
+        const match = sections.find(s => s.el === bestEl);
+        if (match) match.link.classList.add('is-active');
+      }
+    }, {
+      // Fire at several thresholds so we pick the most-visible section.
+      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      rootMargin: '-80px 0px -40% 0px'
+    });
+    sections.forEach(s => spyIO.observe(s.el));
+  }
 })();

@@ -58,10 +58,54 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .menu-btn{display:flex}
 }
 
-.country-card{background:#fff;border:1px solid rgba(118,120,111,.12);border-radius:.5rem;padding:2rem;transition:transform .3s,box-shadow .3s,border-color .3s}
-.country-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(26,28,24,.07);border-color:rgba(56,67,42,.25)}
+.country-card{background:#fff;border:1px solid rgba(118,120,111,.12);border-radius:.5rem;padding:2rem;transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s cubic-bezier(.16,1,.3,1),border-color .3s ease;position:relative;overflow:hidden}
+.country-card::before{content:'';position:absolute;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,#849753,#38432a);transition:width .45s cubic-bezier(.16,1,.3,1)}
+.country-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(26,28,24,.08),0 4px 10px rgba(26,28,24,.04);border-color:rgba(56,67,42,.3)}
+.country-card:hover::before{width:100%}
+.country-card:hover .fi{transform:scale(1.08)}
 .country-flag{margin-bottom:.75rem}
-.country-flag .fi{font-size:1.75rem;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.06)}
+.country-flag .fi{font-size:1.75rem;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.06);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+
+/* ===== GLOBAL UX/UI ENHANCEMENTS ===== */
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal:nth-child(2){transition-delay:.05s}
+.reveal:nth-child(3){transition-delay:.1s}
+.reveal:nth-child(4){transition-delay:.15s}
+.reveal:nth-child(5){transition-delay:.2s}
+.reveal:nth-child(6){transition-delay:.25s}
+.reveal:nth-child(7){transition-delay:.3s}
+.reveal:nth-child(8){transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Enhanced card hover — subtle tilt + glow */
+.card-hover{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .25s ease}
+.card-hover:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 40px rgba(26,28,24,.09),0 4px 12px rgba(26,28,24,.04)}
+
+/* Smooth chevron rotation on accordions already works via .acc-arrow */
+details[open] > summary > .acc-arrow{color:#38432a}
+
+/* Button press feedback */
+button:active,a:active{transform:scale(.98)}
+button,a{transition:transform .15s ease}
+
+/* Link underline animation */
+a.link-animated{position:relative;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s}
+a.link-animated:hover{background-size:100% 1px}
+
+/* Subtle page-header float */
+.hero-shine{position:absolute;inset:0;background:radial-gradient(800px circle at var(--x,50%) var(--y,50%),rgba(255,255,255,.08) 0%,transparent 50%);pointer-events:none;transition:opacity .5s ease}
+
+/* Nav active state underline */
+.nav a[aria-current="page"]{position:relative}
+.nav a[aria-current="page"]::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:#38432a;border-radius:2px;transform-origin:left center;animation:slideIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes slideIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Shine effect on category badges */
+.cat-btn{position:relative;overflow:hidden}
+.cat-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s ease}
+.cat-btn:hover::after{left:100%}
 </style>
 </head>
 <body class="bg-background text-on-surface font-body" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
@@ -110,7 +154,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="max-w-[1240px] mx-auto">
 
     <!-- Záložky -->
-    <div class="flex gap-1 mb-10 border-b border-outline-variant/20" id="region-tabs">
+    <div class="flex gap-1 mb-10 border-b border-outline-variant/20 reveal" id="region-tabs">
       <button data-region="evropa" class="region-tab region-tab--active px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Evropa <span class="text-xs opacity-50 ml-1">10</span></button>
       <button data-region="asie" class="region-tab px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Asie a&nbsp;svět <span class="text-xs opacity-50 ml-1">2</span></button>
       <button data-region="cesko" class="region-tab px-6 py-3 text-sm font-semibold transition-colors rounded-t-lg">Česká republika <span class="text-xs opacity-50 ml-1">3</span></button>
@@ -120,70 +164,70 @@ details[open] .acc-arrow{transform:rotate(180deg)}
     <div class="region-panel" data-panel="evropa">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-gb"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Velká Británie</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Od 2016 · FinTech</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Financial Conduct Authority (FCA) spustila vůbec první regulatorní sandbox na světě na doporučení Marka Walporta. Testování nových platebních systémů, „buy now, pay later" služeb a&nbsp;dalších finančních inovací. Stal se vzorem pro desítky dalších zemí.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-de"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Německo — Reallabore</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Od 2019 · Všechny oblasti</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Nejpropracovanější systém regulatorního učení na světě. Innovationsportal poskytuje mapu běžících Reallabore a&nbsp;metodické nástroje. Příklady: autonomní autobusy v&nbsp;reálném městském provozu, dynamické tarify za energie, digitální řidičské průkazy. Zákon Reallabore-Gesetz (2025) zavádí jednotný právní rámec.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-de"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Německo — HEAT Hamburg</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Doprava</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Projekt HEAT v&nbsp;hamburské HafenCity testoval nasazení autonomního elektrického minibusu v&nbsp;běžném provozu MHD. Ukázal potenciál autonomní dopravy jako doplňku veřejné dopravy, ale také potřebu úprav legislativy a&nbsp;bezpečnostních pravidel.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-pl"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Polsko</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Energetika</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Piaskownice regulacyjne URE (energetický regulační úřad) umožňují testovat inovace v&nbsp;energetice s&nbsp;dočasnými výjimkami z&nbsp;vybraných regulatorních povinností. Zaměření na smart grids, agregaci, lokální bilancování a&nbsp;integraci obnovitelných zdrojů.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-lt"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Litva</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">FinTech · Blockchain</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Sandbox Bank of Lithuania umožňuje testovat inovativní finanční produkty v&nbsp;reálném prostředí pod dohledem regulátora. Od digitálních plateb po blockchainová řešení, včetně platformy LBChain. Patří mezi nejznámější evropské příklady propojení podpory inovací a&nbsp;regulatorního dohledu.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-at"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Rakousko</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Energetika</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Program „100% Erneuerbare-Energie-Reallabore" testuje integrované regionální energetické systémy v&nbsp;šesti různých regionech. Propojuje výzkumné instituce, podniky a&nbsp;veřejnou správu.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-fr"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Francie</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Všechny oblasti</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Článek 72 Ústavy přímo umožňuje experimentování. Iniciativa France Expérimentation dovoluje firmám žádat o&nbsp;výjimky z&nbsp;jakékoli legislativní normy, pokud blokuje inovativní projekt. Rozhoduje mezirezortní mechanismus a&nbsp;Úřad premiéra.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-it"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Itálie</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Všechny oblasti</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Sperimentazione Italia — obecná experimentační doložka umožňuje firmám, univerzitám i&nbsp;výzkumným institucím testovat inovace s&nbsp;dočasnými výjimkami. Po&nbsp;ukončení experimentu mohou být návrhy na trvalou úpravu legislativy předloženy vládě.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-nl"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Nizozemsko</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Sociální politika</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Zákon o&nbsp;nezaměstnanosti umožňuje vládě zavádět dočasné experimenty s&nbsp;novými přístupy k&nbsp;aktivaci uchazečů o&nbsp;zaměstnání. Participační zákon umožňuje obcím realizovat experimenty s&nbsp;různými formami poskytování sociálních dávek. Klíčová inspirace pro sociální sandboxy v&nbsp;ČR.</p>
       </div>
 
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-eu"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Evropská unie</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Nadnárodní rámec</p>
@@ -196,13 +240,13 @@ details[open] .acc-arrow{transform:rotate(180deg)}
     <!-- Asie a svět -->
     <div class="region-panel" data-panel="asie" style="display:none">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-sg"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Singapur</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Zdravotnictví · Telemedicína</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Mezi lety 2018–2021 byla v&nbsp;regulačním sandboxu testována telemedicína. Závěry se promítly do regulace. V&nbsp;roce 2024 ministerstvo zdravotnictví spustilo průběžný sandbox pro další zdravotnické inovace.</p>
       </div>
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-jp"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Japonsko</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Všechny oblasti</p>
@@ -214,19 +258,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
     <!-- Česko -->
     <div class="region-panel" data-panel="cesko" style="display:none">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-cz"></span></div>
         <h3 class="font-headline text-xl italic mb-2">CzechInvest</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">2024 · FinTech</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Digitální regulační prostředí za účelem podpory finančních inovací v&nbsp;rámci Národního plánu obnovy. CzechInvest spolupracuje s&nbsp;malými a&nbsp;středními firmami na finančních trzích. Typ: průzkumný (exploratory).</p>
       </div>
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-cz"></span></div>
         <h3 class="font-headline text-xl italic mb-2">Vl:Aštovka</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">2025–2027 · Sociální politika</p>
         <p class="text-on-surface-variant text-sm leading-relaxed">Projekt AQE advisors z&nbsp;OPZ+, který připravuje metodiku pro regulační prostředí v&nbsp;sociální politice s&nbsp;pilotním ověřením na Ašsku. Zaměření na mezigenerační chudobu.</p>
       </div>
-      <div class="country-card">
+      <div class="country-card reveal">
         <div class="country-flag"><span class="fi fi-cz"></span></div>
         <h3 class="font-headline text-xl italic mb-2">MŠMT — pokusné ověřování</h3>
         <p class="text-[11px] uppercase tracking-widest text-outline font-semibold mb-3">Školství</p>
@@ -278,6 +322,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 <script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
 </footer>
 
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
 <script>
 (function(){
   var btn=document.querySelector('.menu-btn');
@@ -290,5 +347,26 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 })();
 </script>
 
+
+<!-- Scroll reveal + micro-interactions -->
+<script>
+(function(){
+  // Scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && els.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  } else {
+    els.forEach(function(e){e.classList.add('in');});
+  }
+})();
+</script>
 </body>
 </html>

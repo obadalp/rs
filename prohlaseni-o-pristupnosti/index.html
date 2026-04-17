@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prohlášení o přístupnosti | Regulatorní sandboxy</title>
+<meta name="description" content="Prohlášení o přístupnosti webu regulatornisandboxy.cz dle zákona č. 99/2019 Sb. a standardu WCAG 2.1."/>
+<meta name="theme-color" content="#38432a"/>
+<link rel="canonical" href="https://regulatornisandboxy.cz/prohlaseni-o-pristupnosti/"/>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Noto+Serif:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="icon" href="../favicon.ico">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-container":"#4f5a40","secondary-fixed-dim":"#b5d17b",background:"#fbf9f8",secondary:"#4f661d","on-primary-container":"#c4d1b0","surface-container":"#f0eded","on-surface-variant":"#45483f","on-surface":"#1b1c1c","on-background":"#1b1c1c","surface-container-low":"#f6f3f2","primary-fixed-dim":"#bfcbab","secondary-container":"#ceea92","on-primary":"#ffffff",primary:"#38432a","surface":"#fbf9f8",outline:"#76786f","outline-variant":"#c6c7bc"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},fontFamily:{headline:["Noto Serif"],body:["Plus Jakarta Sans"],label:["Inter"]}}}}</script>
+
+<style>
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+:root{--green:#849753;--green-dark:#6b7d41;--green-deep:#4a5a2e;--ink:#1a1c18;--ink-2:#3a3d35;--line:#e5e4dc}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:background .3s,padding .3s,box-shadow .3s}
+.site-header.scrolled,.site-header--solid{background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 var(--line);padding:12px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;max-width:1240px;margin:0 auto;padding:0 32px}
+.brand{flex-shrink:0;display:inline-flex;align-items:center;text-decoration:none}
+.brand-mark{font-weight:600;font-size:17px;color:var(--ink)}
+.nav{display:flex;align-items:center;gap:28px;margin-left:auto}
+.nav a{color:var(--ink-2);font-size:14.5px;font-weight:500;transition:color .2s;text-decoration:none}
+.nav a:hover{color:var(--green-deep)}
+.menu-btn{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:auto;z-index:101}
+.menu-btn span{display:block;width:26px;height:2px;background:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border-radius:2px;font-weight:500;font-size:14.5px;border:1px solid transparent;cursor:pointer;transition:background .2s;text-decoration:none;font-family:inherit}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-dark)}
+@media(max-width:960px){.nav{position:fixed;top:0;right:-100%;background:#fff;flex-direction:column;padding:100px 40px 40px;width:280px;height:100vh;box-shadow:-10px 0 40px rgba(0,0,0,.12);transition:right .32s ease}.nav.open{right:0}.nav a{font-size:18px;padding:12px 0}.menu-btn{display:flex}}
+
+.legal{max-width:780px;margin:0 auto}
+.legal h2{font-family:'Noto Serif',serif;font-style:italic;font-size:1.75rem;color:#38432a;margin:2.5rem 0 1rem;font-weight:400}
+.legal h3{font-size:1.125rem;color:#38432a;margin:1.75rem 0 .75rem;font-weight:700}
+.legal p{color:#1b1c1c;line-height:1.7;margin-bottom:1rem;font-size:16px}
+.legal ul,.legal ol{margin:0 0 1.25rem 1.5rem;line-height:1.7;color:#1b1c1c}
+.legal li{margin-bottom:.4rem}
+.legal a{color:#38432a;text-decoration:underline;text-underline-offset:3px}
+.legal strong{color:#38432a}
+.legal .todo{background:#fff8e1;border-left:4px solid #ffc107;padding:12px 16px;margin:1rem 0;border-radius:4px;font-size:14px;color:#5c4d20}
+.legal .todo strong{color:#2a2a2a}
+.legal .status-box{background:#eaf5e9;border-left:4px solid #4caf50;padding:14px 18px;margin:1.25rem 0;border-radius:6px;font-size:15px}
+.legal .status-box strong{color:#1e5c38}
+</style>
+</head>
+<body class="bg-background text-on-surface" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
+
+<header class="site-header site-header--solid">
+  <div class="header-inner">
+    <a href="../" class="brand"><span class="brand-mark">Regulatorní sandboxy</span></a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a href="../#sandbox">Sandbox</a>
+      <a href="../#typy">Typy</a>
+      <a href="../#metodika">Metodika</a>
+      <a href="../#osa">Průběh</a>
+      <a href="../#partneri">Partneři</a>
+      <a href="../priklady-ze-zahranici/">Příklady</a>
+      <a href="../clanky/">Články</a>
+      <a href="../faq/">FAQ</a>
+      <a href="../#kontakt" class="btn btn-sm btn-primary">Kontakt</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-16 relative overflow-hidden isolate" style="min-height:280px">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#2b3a1a] via-[#4a5a2e] to-[#6b7d41]"></div>
+  <div class="absolute inset-0 -z-10 opacity-50 mix-blend-luminosity" style="background:url(../img/hero-bg.png) center/cover no-repeat"></div>
+  <div class="absolute inset-0 -z-10 bg-gradient-to-t from-[rgba(20,26,12,.7)] to-[rgba(20,26,12,.3)]"></div>
+  <div class="max-w-[1240px] mx-auto relative">
+    <nav aria-label="Drobečková navigace" class="text-xs text-white/60 mb-6">
+      <a href="../" class="hover:text-white/90">Úvod</a>
+      <span class="mx-2">/</span>
+      <span class="text-white/80">Prohlášení o přístupnosti</span>
+    </nav>
+    <span class="font-label text-white/70 uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Právní informace</span>
+    <h1 class="font-headline text-4xl md:text-5xl lg:text-6xl mb-4 italic max-w-4xl leading-[1.05] text-white">Prohlášení o přístupnosti</h1>
+  </div>
+</section>
+
+<main class="py-12 md:py-16 px-6 md:px-16">
+  <article class="legal">
+
+    <div class="todo">
+      <strong>Poznámka pro autory:</strong> Před publikací nechte web otestovat proti WCAG 2.1 (např. pomocí axe DevTools, Lighthouse, WAVE). Konkrétní nedostatky pak vyjmenujte v&nbsp;sekci „Stav souladu". Datum vytvoření prohlášení a&nbsp;datum posledního přezkumu vyplňte aktuálními údaji.
+    </div>
+
+    <p><strong>AQE advisors, a.&nbsp;s.</strong> (IČO 26954770) se&nbsp;zavazuje k&nbsp;zpřístupnění webových stránek <a href="https://regulatornisandboxy.cz">regulatornisandboxy.cz</a> v&nbsp;souladu se&nbsp;zákonem č.&nbsp;99/2019 Sb., o&nbsp;přístupnosti internetových stránek a&nbsp;mobilních aplikací, ve&nbsp;znění pozdějších předpisů, který provádí směrnici Evropského parlamentu a&nbsp;Rady (EU) 2016/2102.</p>
+
+    <h2>Stav souladu</h2>
+    <div class="status-box">
+      <strong>Tyto webové stránky jsou částečně v&nbsp;souladu</strong> s&nbsp;normou <a href="https://www.w3.org/TR/WCAG21/" target="_blank" rel="noopener">WCAG 2.1 úrovně AA</a> z&nbsp;důvodu nesouladu nebo výjimek uvedených níže.
+    </div>
+
+    <h2>Nepřístupný obsah</h2>
+    <p>Níže uvedený obsah není přístupný:</p>
+    <ul>
+      <li><strong>[Doplnit po testování]</strong> — například: některé dekorativní SVG ilustrace nemají alternativní textové popisy (jsou však označené <code>aria-hidden</code>).</li>
+      <li><strong>[Doplnit po testování]</strong> — například: kontrast některých pomocných textů (placeholdery, disabled stavy) může být nižší než 4,5:1.</li>
+    </ul>
+    <p>Na&nbsp;odstranění těchto nedostatků pracujeme a&nbsp;plánujeme je opravit do&nbsp;<em>[datum]</em>.</p>
+
+    <h2>Přístupnost webu</h2>
+    <p>Web je navržen s&nbsp;důrazem na&nbsp;přístupnost pro uživatele s&nbsp;různými potřebami:</p>
+    <ul>
+      <li><strong>Sémantické HTML</strong> — použití správných tagů (<code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, nadpisy v&nbsp;hierarchii H1–H4).</li>
+      <li><strong>Klávesová navigace</strong> — všechny interaktivní prvky jsou ovládatelné klávesnicí (Tab, Enter, Escape).</li>
+      <li><strong>ARIA atributy</strong> — <code>aria-label</code>, <code>aria-expanded</code>, <code>aria-current</code>, <code>aria-live</code> pro komunikaci stavu.</li>
+      <li><strong>Kontrast barev</strong> — hlavní text splňuje minimálně 4,5:1 (WCAG AA).</li>
+      <li><strong>Responzivní design</strong> — funguje na&nbsp;mobilních zařízeních i&nbsp;při zoomu do&nbsp;200&nbsp;%.</li>
+      <li><strong>Redukce animací</strong> — respektujeme nastavení <code>prefers-reduced-motion</code>; uživatelé s&nbsp;citlivostí na&nbsp;pohyb vidí statické verze.</li>
+      <li><strong>Čitelná typografie</strong> — dostatečná velikost textu a&nbsp;řádkování.</li>
+    </ul>
+
+    <h2>Vypracování tohoto prohlášení</h2>
+    <p>Toto prohlášení bylo vypracováno dne <strong>1.&nbsp;4.&nbsp;2026</strong> na&nbsp;základě <em>vlastního posouzení provedeného subjektem veřejného sektoru</em>. Naposledy bylo přezkoumáno dne <strong>1.&nbsp;4.&nbsp;2026</strong>.</p>
+
+    <h2>Zpětná vazba a kontakt</h2>
+    <p>Máte-li k&nbsp;přístupnosti těchto stránek <strong>jakékoliv dotazy, připomínky nebo jste narazili na&nbsp;problém</strong>, kontaktujte nás:</p>
+    <ul>
+      <li>E-mail: <a href="mailto:pristupnost@aqe.cz">pristupnost@aqe.cz</a></li>
+      <li>Pro obecné dotazy: <a href="mailto:pavelka@aqe.cz">pavelka@aqe.cz</a></li>
+    </ul>
+    <p>Na&nbsp;vaše podněty odpovíme do&nbsp;30 dnů.</p>
+
+    <h2>Postupy pro prosazování práva</h2>
+    <p>Pokud nedostanete uspokojivou odpověď, můžete se&nbsp;obrátit na&nbsp;<strong>Ministerstvo vnitra ČR</strong>, odbor eGovernmentu:</p>
+    <address class="not-italic">
+      Ministerstvo vnitra ČR<br>
+      Odbor eGovernmentu<br>
+      náměstí Hrdinů 1634/3<br>
+      140 21 Praha 4<br>
+      E-mail: <a href="mailto:pristupnost@mvcr.cz">pristupnost@mvcr.cz</a>
+    </address>
+
+    <p class="mt-10 pt-6 border-t border-outline-variant/20 text-sm text-outline">Poslední aktualizace: <strong>1.&nbsp;4.&nbsp;2026</strong></p>
+  </article>
+</main>
+
+<footer class="bg-[#f0eded] w-full border-t border-primary/10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-6 md:px-12 py-12 md:py-16 max-w-screen-2xl mx-auto">
+<div>
+<div class="font-serif italic text-xl text-primary mb-2">regulatornisandboxy.cz</div>
+<p class="text-sm text-on-surface-variant"><a href="https://www.aqe.cz" target="_blank" rel="noopener" class="text-primary font-semibold no-underline hover:underline">AQE advisors, a.s.</a> · IČO: 26954770 · <span id="footer-year">2026</span></p>
+<p class="text-xs text-outline mt-2">Projekt Vl:Aštovka (CZ.03.03.01/23_057/0006345) je financován z&nbsp;Operačního programu Zaměstnanost plus (OPZ+).</p>
+</div>
+<div class="flex gap-6 md:justify-end items-center flex-wrap">
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../priklady-ze-zahranici/">Příklady</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../clanky/">Články</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../faq/">FAQ</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../legislativa/">Legislativa</a>
+<a class="text-primary hover:underline underline-offset-4 text-sm no-underline" href="../#kontakt">Kontakt</a>
+</div>
+</div>
+<script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</footer>
+
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
+<script>
+(function(){var btn=document.querySelector('.menu-btn');var nav=document.querySelector('.nav');if(btn&&nav){btn.addEventListener('click',function(){nav.classList.toggle('open');btn.setAttribute('aria-expanded',nav.classList.contains('open')?'true':'false')})}})();
+</script>
+
+</body>
+</html>

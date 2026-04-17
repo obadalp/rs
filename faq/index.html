@@ -56,6 +56,47 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .nav a{font-size:18px;padding:12px 0}
 .menu-btn{display:flex}
 }
+
+/* ===== GLOBAL UX/UI ENHANCEMENTS ===== */
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal:nth-child(2){transition-delay:.05s}
+.reveal:nth-child(3){transition-delay:.1s}
+.reveal:nth-child(4){transition-delay:.15s}
+.reveal:nth-child(5){transition-delay:.2s}
+.reveal:nth-child(6){transition-delay:.25s}
+.reveal:nth-child(7){transition-delay:.3s}
+.reveal:nth-child(8){transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}}
+
+/* Enhanced card hover — subtle tilt + glow */
+.card-hover{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1),border-color .25s ease}
+.card-hover:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 18px 40px rgba(26,28,24,.09),0 4px 12px rgba(26,28,24,.04)}
+
+/* Smooth chevron rotation on accordions already works via .acc-arrow */
+details[open] > summary > .acc-arrow{color:#38432a}
+
+/* Button press feedback */
+button:active,a:active{transform:scale(.98)}
+button,a{transition:transform .15s ease}
+
+/* Link underline animation */
+a.link-animated{position:relative;text-decoration:none;background-image:linear-gradient(currentColor,currentColor);background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s}
+a.link-animated:hover{background-size:100% 1px}
+
+/* Subtle page-header float */
+.hero-shine{position:absolute;inset:0;background:radial-gradient(800px circle at var(--x,50%) var(--y,50%),rgba(255,255,255,.08) 0%,transparent 50%);pointer-events:none;transition:opacity .5s ease}
+
+/* Nav active state underline */
+.nav a[aria-current="page"]{position:relative}
+.nav a[aria-current="page"]::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:#38432a;border-radius:2px;transform-origin:left center;animation:slideIn .4s cubic-bezier(.16,1,.3,1)}
+@keyframes slideIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Shine effect on category badges */
+.cat-btn{position:relative;overflow:hidden}
+.cat-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s ease}
+.cat-btn:hover::after{left:100%}
 </style>
 </head>
 <body class="bg-background text-on-surface font-body" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
@@ -104,7 +145,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-8">
 
     <!-- Levý sloupec: otázky -->
-    <div class="md:w-2/5 space-y-1" id="faq-questions">
+    <div class="md:w-2/5 space-y-1 reveal" id="faq-questions">
       <button data-faq="0" class="faq-q faq-q--active w-full text-left px-5 py-4 rounded-xl transition-all duration-200 font-semibold text-sm flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-xl">science</span> Co je regulatorní sandbox?</button>
       <button data-faq="1" class="faq-q w-full text-left px-5 py-4 rounded-xl transition-all duration-200 font-semibold text-sm flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-xl">payments</span> Kdo to platí?</button>
       <button data-faq="2" class="faq-q w-full text-left px-5 py-4 rounded-xl transition-all duration-200 font-semibold text-sm flex items-center gap-3"><span class="material-symbols-outlined text-secondary text-xl">verified</span> Je to legální?</button>
@@ -116,7 +157,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
     </div>
 
     <!-- Pravý sloupec: odpověď -->
-    <div class="md:w-3/5 bg-surface p-8 md:p-10 rounded-xl border border-outline-variant/10 md:sticky md:top-24 self-start">
+    <div class="md:w-3/5 bg-surface p-8 md:p-10 rounded-xl border border-outline-variant/10 md:sticky md:top-24 self-start reveal">
       <h2 class="font-headline text-2xl italic text-primary mb-4 flex items-center gap-3"><span class="material-symbols-outlined text-secondary" id="faq-icon">science</span> <span id="faq-title">Co je regulatorní sandbox?</span></h2>
       <p class="text-on-surface-variant leading-relaxed" id="faq-body">Regulatorní sandbox je časově omezený rámec, který umožňuje zkoušet inovativní služby nebo technologie v&nbsp;reálném prostředí, i&nbsp;když je stávající legislativa zatím nezná. Regulátor předem vymezí pravidla, podmínky a&nbsp;dobu trvání testu.</p>
     </div>
@@ -151,9 +192,11 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   })();
   </script>
   <style>
-  .faq-q{color:#45483f;background:transparent;border:none;cursor:pointer;font-family:inherit}
-  .faq-q:hover{background:rgba(56,67,42,.04);color:#38432a}
-  .faq-q--active{background:rgba(56,67,42,.08)!important;color:#38432a!important;border-left:3px solid #38432a}
+  .faq-q{color:#45483f;background:transparent;border:none;cursor:pointer;font-family:inherit;transition:background-color .25s ease,color .25s ease,transform .2s ease,border-color .2s ease;border-left:3px solid transparent}
+  .faq-q:hover{background:rgba(56,67,42,.04);color:#38432a;transform:translateX(3px)}
+  .faq-q--active{background:rgba(56,67,42,.08)!important;color:#38432a!important;border-left-color:#38432a!important;transform:translateX(0)!important}
+  .faq-q .material-symbols-outlined{transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .faq-q:hover .material-symbols-outlined,.faq-q--active .material-symbols-outlined{transform:scale(1.12)}
   </style>
 </main>
 
@@ -175,6 +218,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 <script>(function(){var y=document.getElementById('footer-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
 </footer>
 
+<!-- Právní pás -->
+<div class="bg-[#e8e4e4] border-t border-outline-variant/20 py-4 px-6">
+  <div class="max-w-[1240px] mx-auto flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-outline text-center md:text-left">
+    <span>© <span id="legal-year">2026</span> AQE advisors, a. s. · Všechna práva vyhrazena.</span>
+    <nav aria-label="Právní informace" class="flex gap-5 flex-wrap justify-center">
+      <a class="hover:text-primary transition-colors" href="../ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
+      <a class="hover:text-primary transition-colors" href="../cookies/">Cookies</a>
+      <a class="hover:text-primary transition-colors" href="../prohlaseni-o-pristupnosti/">Prohlášení o&nbsp;přístupnosti</a>
+    </nav>
+  </div>
+  <script>(function(){var y=document.getElementById('legal-year');if(y){var n=new Date().getFullYear();if(n>2026)y.textContent=n;}})();</script>
+</div>
+
 <script>
 (function(){
   var btn=document.querySelector('.menu-btn');
@@ -187,5 +243,26 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 })();
 </script>
 
+
+<!-- Scroll reveal + micro-interactions -->
+<script>
+(function(){
+  // Scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && els.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  } else {
+    els.forEach(function(e){e.classList.add('in');});
+  }
+})();
+</script>
 </body>
 </html>
