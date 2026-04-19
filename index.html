@@ -76,6 +76,19 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .type-row__ex-label{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;flex-shrink:0;padding-top:2px}
 .type-row__ex strong{color:#1a1a1a;font-weight:600}
 
+/* Hero title — word-by-word reveal on load */
+.hero-title--animated .hw{display:inline-block;opacity:0;transform:translateY(32px);animation:hwIn .9s cubic-bezier(.16,1,.3,1) forwards}
+.hero-title--animated .hw:nth-child(1){animation-delay:.15s}
+.hero-title--animated .hw:nth-child(2){animation-delay:.26s}
+.hero-title--animated .hw:nth-child(3){animation-delay:.37s}
+.hero-title--animated .hw:nth-child(4){animation-delay:.48s}
+.hero-title--animated .hw:nth-child(5){animation-delay:.59s}
+@keyframes hwIn{to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.hero-title--animated .hw{opacity:1!important;transform:none!important;animation:none!important}}
+
+/* Scroll progress bar — thin coral line under header */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--green) 0%,var(--green-dark) 100%);z-index:200;transition:width .08s linear;pointer-events:none;box-shadow:0 0 10px rgba(196,69,54,.4)}
+
 /* Approaches dark block (3 přístupy) */
 .approaches{position:relative;background:#1a1a1a;color:#fff;border-radius:4px;padding:56px 40px;overflow:hidden}
 .approaches::before{content:'';position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:radial-gradient(ellipse at center,rgba(196,69,54,.18) 0%,transparent 60%);pointer-events:none}
@@ -148,6 +161,9 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 </head>
 <body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif">
 
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
@@ -178,9 +194,9 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
     <span class="hero-eyebrow">AQE advisors · 2024–2026</span>
-    <h1 class="hero-title">
-      Regulatorní sandboxy<br>
-      <span class="serif-it">neboli regulační</span> prostředí
+    <h1 class="hero-title hero-title--animated">
+      <span class="hw">Regulatorní</span> <span class="hw">sandboxy</span><br>
+      <span class="hw serif-it">neboli</span> <span class="hw serif-it">regulační</span> <span class="hw">prostředí</span>
     </h1>
     <p class="hero-lead">
       Prostor pro bezpečné testování inovací pod dohledem státu — ve všech oblastech života společnosti.
@@ -198,17 +214,17 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="qf-inner">
     <div class="qf-item">
       <div class="k">Zákon</div>
-      <div class="v"><strong>328/2025</strong> Sb.</div>
+      <div class="v"><strong class="stat-num" data-count="328">0</strong>/<span class="stat-num" data-count="2025">0</span> Sb.</div>
       <div class="d">Kontrolované testovací prostředí v&nbsp;ČR</div>
     </div>
     <div class="qf-item">
       <div class="k">Resortů</div>
-      <div class="v"><strong>14</strong> <em>+ 17</em></div>
+      <div class="v"><strong class="stat-num" data-count="14">0</strong> <em>+ <span class="stat-num" data-count="17">0</span></em></div>
       <div class="d">Ministerstev a&nbsp;dalších ústředních orgánů</div>
     </div>
     <div class="qf-item">
       <div class="k">Zákonů v DEPO II</div>
-      <div class="v"><strong>70<em>+</em></strong></div>
+      <div class="v"><strong class="stat-num" data-count="70">0</strong><em>+</em></div>
       <div class="d">Složkových zákonů k&nbsp;novelizaci</div>
     </div>
     <div class="qf-item">
@@ -1115,6 +1131,24 @@ Odeslat podnět
   }
   document.getElementById('cookie-accept').addEventListener('click', function(){ set('accept'); });
   document.getElementById('cookie-reject').addEventListener('click', function(){ set('reject'); });
+})();
+</script>
+
+<!-- Scroll progress bar -->
+<script>
+(function(){
+  var bar = document.getElementById('scroll-progress');
+  if(!bar) return;
+  function update(){
+    var h = document.documentElement;
+    var scrolled = h.scrollTop || document.body.scrollTop;
+    var max = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = max > 0 ? (scrolled / max) * 100 : 0;
+    bar.style.width = pct + '%';
+  }
+  update();
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
 })();
 </script>
 
