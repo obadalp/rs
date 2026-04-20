@@ -177,9 +177,9 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .team-card__info{display:flex;flex-direction:column;min-width:0}
 .team-card__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.1;letter-spacing:-.01em;color:#1a1a1a;margin:0 0 6px}
 .team-card__role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 12px}
-.team-card__mail{font-size:12.5px;color:var(--ink-2);font-weight:500;font-family:'JetBrains Mono','Plus Jakarta Sans',monospace;letter-spacing:-.01em;word-break:break-all;text-decoration:none;transition:color .15s;display:inline-block;padding:2px 0;margin-bottom:8px}
-.team-card__mail:hover{color:var(--green)}
-.team-card__mail--empty{color:var(--muted);font-style:italic;font-family:inherit;font-size:11.5px}
+.team-card__mail{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;color:var(--ink);font-weight:500;letter-spacing:-.005em;word-break:break-all;text-decoration:none;transition:color .15s,border-color .15s;display:inline-block;padding-bottom:2px;border-bottom:1px solid rgba(196,69,54,.25);margin-bottom:10px;align-self:flex-start}
+.team-card__mail:hover{color:var(--green);border-bottom-color:var(--green)}
+.team-card__mail--empty{color:var(--muted);font-style:italic;font-weight:400;border-bottom:0;font-size:12px}
 .team-card__cta{margin-top:auto;font-size:12.5px;color:var(--green);font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:0;background:transparent;border:0;font-family:inherit;transition:color .2s;align-self:flex-start}
 .team-card:hover .team-card__cta{color:var(--green-dark)}
 .team-card__cta .material-symbols-outlined{font-size:16px;transition:transform .2s}
@@ -1215,7 +1215,18 @@ Ozvěte se nám
 </div>
 <div class="col-span-12 lg:col-span-7 lg:pl-12 flex flex-col">
 <!-- Formulář -->
-<form action="mailto:pavelka@AQE.cz" method="post" enctype="text/plain" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
+<!--
+  FORMSPREE SETUP:
+  1) Zaregistruj se na https://formspree.io (zdarma, 50 zpráv/měsíc)
+  2) Vytvoř nový Form s cílovou adresou (např. pavelka@AQE.cz)
+  3) Formspree ti dá endpoint ve tvaru https://formspree.io/f/xxxxxxxx
+  4) Ten xxxxxxxx kód vlož níž místo YOUR_FORMSPREE_ID
+-->
+<form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
+<!-- Hidden fields: kontrola pro Formspree -->
+<input type="hidden" name="_subject" value="Nový podnět – regulatornisandboxy.cz">
+<input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
 <div class="grid sm:grid-cols-2 gap-5">
 <div>
 <label for="f-name" class="block text-xs uppercase tracking-widest opacity-70 mb-2 font-semibold">Jméno a&nbsp;příjmení</label>
@@ -1228,7 +1239,7 @@ Ozvěte se nám
 </div>
 <div>
 <label for="f-email" class="block text-xs uppercase tracking-widest opacity-70 mb-2 font-semibold">E-mail</label>
-<input id="f-email" name="Email" type="email" required class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-on-primary placeholder:text-white/40 focus:outline-none focus:border-secondary-fixed-dim" placeholder="vas@email.cz"/>
+<input id="f-email" name="email" type="email" required class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-on-primary placeholder:text-white/40 focus:outline-none focus:border-secondary-fixed-dim" placeholder="vas@email.cz"/>
 </div>
 <div class="flex-1 flex flex-col">
 <label for="f-msg" class="block text-xs uppercase tracking-widest opacity-70 mb-2 font-semibold">Zpráva</label>
@@ -1238,11 +1249,12 @@ Ozvěte se nám
 <input id="f-gdpr" type="checkbox" required class="mt-0.5"/>
 <label for="f-gdpr">Souhlasím se&nbsp;zpracováním osobních údajů pro účely vyřízení dotazu.</label>
 </div>
-<button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors">
-<span class="material-symbols-outlined text-base">send</span>
-Odeslat podnět
+<button id="f-submit" type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors disabled:opacity-60 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-base" id="f-submit-icon">send</span>
+<span id="f-submit-label">Odeslat podnět</span>
 </button>
-<p class="text-[11px] opacity-50 leading-relaxed">Formulář v&nbsp;této podobě otevře váš e-mailový klient. Po&nbsp;nasazení se&nbsp;napojí na&nbsp;serverové zpracování (např. Formspree / vlastní endpoint).</p>
+<!-- Feedback hlášení -->
+<div id="f-feedback" class="hidden rounded-lg p-4 text-sm" role="status" aria-live="polite"></div>
 </form>
 </div>
 </div>
@@ -1393,6 +1405,65 @@ Odeslat podnět
   window.addEventListener('resize', update);
 })();
 </script>
+
+<!-- Kontaktní formulář — AJAX submit přes Formspree -->
+<script>
+(function(){
+  var form = document.getElementById('contact-form');
+  if(!form) return;
+  var feedback = document.getElementById('f-feedback');
+  var btn = document.getElementById('f-submit');
+  var btnIcon = document.getElementById('f-submit-icon');
+  var btnLabel = document.getElementById('f-submit-label');
+
+  function showFeedback(type, msg){
+    feedback.className = 'rounded-lg p-4 text-sm border';
+    if(type === 'success'){
+      feedback.className += ' bg-green-500/10 border-green-400/40 text-green-100';
+    } else {
+      feedback.className += ' bg-red-500/10 border-red-400/40 text-red-100';
+    }
+    feedback.textContent = msg;
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    // Pokud je endpoint ještě placeholder, neposílat
+    if(/YOUR_FORMSPREE_ID/.test(form.action)){
+      showFeedback('error', 'Formulář zatím není aktivní — probíhá nastavení odesílacího systému.');
+      return;
+    }
+    btn.disabled = true;
+    btnIcon.textContent = 'progress_activity';
+    btnIcon.style.animation = 'spin 1s linear infinite';
+    btnLabel.textContent = 'Odesílám…';
+    try {
+      var data = new FormData(form);
+      var resp = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if(resp.ok){
+        form.reset();
+        showFeedback('success', 'Díky! Váš podnět byl v pořádku odeslán. Ozveme se co nejdříve.');
+      } else {
+        var errData = await resp.json().catch(function(){ return {}; });
+        var msg = (errData.errors && errData.errors.map(function(e){return e.message;}).join(', ')) || 'Odeslání se nepodařilo. Zkuste to prosím znovu.';
+        showFeedback('error', msg);
+      }
+    } catch(err){
+      showFeedback('error', 'Chyba sítě. Zkuste to prosím za chvíli znovu, nebo nám napište přímo.');
+    } finally {
+      btn.disabled = false;
+      btnIcon.textContent = 'send';
+      btnIcon.style.animation = '';
+      btnLabel.textContent = 'Odeslat podnět';
+    }
+  });
+})();
+</script>
+<style>@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
 
 <!-- Tým — modal pro medailonek -->
 <script>
