@@ -170,49 +170,27 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .approach-col p{color:rgba(255,255,255,.78);font-size:14.5px;line-height:1.55;margin-bottom:12px}
 .approach-col .approach-out{color:rgba(255,255,255,.45);font-size:12.5px;margin-top:4px;line-height:1.5}
 
-/* Tým — karty s fotkou vpravo, klik otevře modal */
-.team-card{display:grid;grid-template-columns:1fr 130px;gap:22px;background:#fff;padding:22px 24px;border-radius:8px;border:1px solid rgba(26,26,26,.06);box-shadow:0 1px 2px rgba(26,26,26,.03);transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;cursor:pointer;text-align:left;width:100%;font-family:inherit;align-items:stretch}
-.team-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px -14px rgba(26,26,26,.16);border-color:rgba(26,26,26,.14)}
-.team-card:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+/* Tým — karty 2×3 s velkou fotkou + bio viditelný hned */
+.team-card{display:grid;grid-template-columns:1fr 260px;gap:32px;background:#fff;padding:32px 34px;border-radius:8px;border:1px solid rgba(26,26,26,.06);box-shadow:0 1px 2px rgba(26,26,26,.03);transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;text-align:left;width:100%;font-family:inherit;align-items:stretch}
+.team-card:hover{box-shadow:0 10px 24px -12px rgba(26,26,26,.12);border-color:rgba(26,26,26,.12)}
 .team-card__info{display:flex;flex-direction:column;min-width:0}
-.team-card__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.1;letter-spacing:-.01em;color:#1a1a1a;margin:0 0 6px}
-.team-card__role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 12px}
-.team-card__mail{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;color:var(--ink);font-weight:500;letter-spacing:-.005em;word-break:break-all;text-decoration:none;transition:color .15s,border-color .15s;display:inline-block;padding-bottom:2px;border-bottom:1px solid rgba(196,69,54,.25);margin-bottom:10px;align-self:flex-start}
+.team-card__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:28px;line-height:1.05;letter-spacing:-.01em;color:#1a1a1a;margin:0 0 6px}
+.team-card__role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 14px}
+.team-card__mail{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13.5px;color:var(--ink);font-weight:500;letter-spacing:-.005em;word-break:break-all;text-decoration:none;transition:color .15s,border-color .15s;display:inline-block;padding-bottom:2px;border-bottom:1px solid rgba(196,69,54,.25);margin:0 0 18px;align-self:flex-start}
 .team-card__mail:hover{color:var(--green);border-bottom-color:var(--green)}
 .team-card__mail--empty{color:var(--muted);font-style:italic;font-weight:400;border-bottom:0;font-size:12px}
-.team-card__cta{margin-top:auto;font-size:12.5px;color:var(--green);font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:0;background:transparent;border:0;font-family:inherit;transition:color .2s;align-self:flex-start}
-.team-card:hover .team-card__cta{color:var(--green-dark)}
-.team-card__cta .material-symbols-outlined{font-size:16px;transition:transform .2s}
-.team-card:hover .team-card__cta .material-symbols-outlined{transform:translateX(3px)}
-.team-card__photo{width:130px;height:200px;background:linear-gradient(135deg,#f0ece4,#e8e4de);border-radius:4px;overflow:hidden;flex-shrink:0;position:relative;align-self:center}
+.team-card__bio{font-size:13.5px;line-height:1.7;color:var(--ink-2);margin:0}
+.team-card__photo{width:260px;min-height:340px;background:linear-gradient(135deg,#f0ece4,#e8e4de);border-radius:4px;overflow:hidden;flex-shrink:0;position:relative;align-self:stretch}
 .team-card__photo::after{content:'';position:absolute;inset:0;border:1px solid rgba(26,26,26,.06);border-radius:4px;pointer-events:none}
-.team-card__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-@media(max-width:640px){
-  .team-card{grid-template-columns:1fr;gap:16px;padding:22px}
-  .team-card__photo{width:120px;height:160px;order:-1}
+.team-card__photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+@media(max-width:880px){
+  .team-card{grid-template-columns:1fr 200px;padding:26px;gap:24px}
+  .team-card__photo{width:200px;min-height:260px}
+  .team-card__name{font-size:24px}
 }
-
-/* Tým modal — klik na kartu otevře medailonek + velkou fotku */
-.team-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
-.team-modal.open{display:flex}
-.team-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);cursor:pointer;animation:tmFadeIn .2s ease}
-@keyframes tmFadeIn{from{opacity:0}to{opacity:1}}
-.team-modal__dialog{position:relative;background:#fff;border-radius:12px;width:100%;max-width:820px;max-height:92vh;display:grid;grid-template-columns:320px 1fr;box-shadow:0 40px 80px -20px rgba(0,0,0,.35);overflow:hidden;animation:tmRise .3s cubic-bezier(.16,1,.3,1)}
-@keyframes tmRise{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
-.team-modal__photo{background:linear-gradient(135deg,#f0ece4,#e8e4de);position:relative;min-height:460px}
-.team-modal__photo img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
-.team-modal__body{padding:44px 40px 40px;overflow-y:auto;display:flex;flex-direction:column}
-.team-modal__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:38px;line-height:1.05;letter-spacing:-.02em;color:#1a1a1a;margin:0 0 10px;padding-right:48px}
-.team-modal__role{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 24px}
-.team-modal__bio{font-size:14.5px;line-height:1.72;color:var(--ink-2);margin:0}
-.team-modal__close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:999px;border:0;background:rgba(26,26,26,.06);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:background .15s;z-index:2}
-.team-modal__close:hover{background:rgba(196,69,54,.15);color:var(--green)}
-.team-modal__close .material-symbols-outlined{font-size:22px}
-@media(max-width:720px){
-  .team-modal__dialog{grid-template-columns:1fr;max-height:95vh;overflow-y:auto}
-  .team-modal__photo{min-height:300px;height:300px}
-  .team-modal__body{padding:28px 24px 32px}
-  .team-modal__name{font-size:30px;padding-right:40px}
+@media(max-width:640px){
+  .team-card{grid-template-columns:1fr;gap:20px;padding:24px}
+  .team-card__photo{width:100%;max-width:220px;min-height:280px;margin:0 auto;order:-1}
 }
 
 /* Globus (Ve světě) — dark block s radial clay gradient (kompaktnější) */
@@ -504,6 +482,25 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 </div>
 </div>
 </section>
+
+<!-- CTA pás „Chcete se zapojit" — mezi 01 a 02 -->
+<div class="px-6 md:px-16 bg-surface-container-low">
+  <div class="max-w-[1440px] mx-auto pb-24 md:pb-28 -mt-4">
+    <div class="bg-primary text-on-primary rounded-xl p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center gap-8 justify-between reveal">
+      <div class="flex items-start gap-5 flex-1">
+        <span class="material-symbols-outlined text-secondary-fixed-dim text-4xl flex-shrink-0">diversity_3</span>
+        <div>
+          <h3 class="font-headline text-2xl md:text-3xl italic mb-2">Chcete se zapojit?</h3>
+          <p class="opacity-85 leading-relaxed max-w-2xl">Hledáme další ministerstva, regulátory, inovační aktéry a&nbsp;samosprávy pro budování sítě sandboxů v&nbsp;ČR. Rádi se s&nbsp;vámi potkáme a&nbsp;probereme možnosti spolupráce.</p>
+        </div>
+      </div>
+      <a href="#kontakt" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors whitespace-nowrap flex-shrink-0">
+        <span class="material-symbols-outlined text-base">mail</span>
+        Ozvěte se nám
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ===== TYPOLOGIE ===== -->
 <section id="typy" class="py-24 md:py-32 px-6 md:px-16 bg-surface">
@@ -1059,21 +1056,6 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 })();
 </script>
 
-<!-- CTA pás — široký -->
-<div class="max-w-[1440px] mx-auto mt-20 bg-primary text-on-primary rounded-xl p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center gap-8 justify-between reveal">
-<div class="flex items-start gap-5 flex-1">
-<span class="material-symbols-outlined text-secondary-fixed-dim text-4xl flex-shrink-0">diversity_3</span>
-<div>
-<h3 class="font-headline text-2xl md:text-3xl italic mb-2">Chcete se zapojit?</h3>
-<p class="opacity-85 leading-relaxed max-w-2xl">Hledáme další ministerstva, regulátory, inovační aktéry a&nbsp;samosprávy pro budování sítě sandboxů v&nbsp;ČR. Rádi se s&nbsp;vámi potkáme a&nbsp;probereme možnosti spolupráce.</p>
-</div>
-</div>
-<a href="#kontakt" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors whitespace-nowrap flex-shrink-0">
-<span class="material-symbols-outlined text-base">mail</span>
-Ozvěte se nám
-</a>
-</div>
-
 </section>
 
 <!-- ===== TÝM ===== -->
@@ -1084,92 +1066,68 @@ Ozvěte se nám
 <h2 class="font-headline text-4xl md:text-5xl mb-4 italic">Náš <em style="color:var(--green)">tým</em></h2>
 <p class="text-on-surface-variant">Iniciátor: <a href="https://www.aqe.cz" target="_blank" class="text-primary font-semibold underline">AQE advisors, a.s.</a></p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="team-grid">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="team-grid">
 
-<button type="button" class="team-card reveal" data-photo="img/team/havranek.jpg" data-name="Jan Havránek" data-role="Strategický rozvoj">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Jan Havránek</h4>
     <p class="team-card__role">Strategický rozvoj</p>
-    <a class="team-card__mail" href="mailto:havranek@AQE.cz" data-no-modal>havranek@AQE.cz</a>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Působí jako ředitel AQE advisors, a.s. a&nbsp;specialista na strategický rozvoj ve&nbsp;veřejné správě. Více než dvě dekády se věnuje propojování inovací s&nbsp;regulatorním prostředím — od&nbsp;řízení strukturálních fondů na&nbsp;MPSV a&nbsp;Ministerstvu vnitra přes poradenství pro TA&nbsp;ČR až po rozvoj nástrojů pro efektivní správu měst a&nbsp;obcí. Ph.D. získal na&nbsp;Mendelově univerzitě v&nbsp;Brně za&nbsp;výzkum zaměřený na zefektivnění řízení organizací veřejné správy. Odpovídá za&nbsp;strategický rozvoj a&nbsp;propojení metodiky regulačních prostředí s&nbsp;českou institucionální praxí.</template>
+    <a class="team-card__mail" href="mailto:havranek@AQE.cz">havranek@AQE.cz</a>
+    <p class="team-card__bio">Působí jako ředitel AQE advisors, a.s. a&nbsp;specialista na strategický rozvoj ve&nbsp;veřejné správě. Více než dvě dekády se věnuje propojování inovací s&nbsp;regulatorním prostředím — od&nbsp;řízení strukturálních fondů na&nbsp;MPSV a&nbsp;Ministerstvu vnitra přes poradenství pro TA&nbsp;ČR až po rozvoj nástrojů pro efektivní správu měst a&nbsp;obcí. Ph.D. získal na&nbsp;Mendelově univerzitě v&nbsp;Brně za&nbsp;výzkum zaměřený na zefektivnění řízení organizací veřejné správy.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/havranek.jpg" alt="Jan Havránek" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-<button type="button" class="team-card reveal" data-photo="img/team/pavelka.jpg" data-name="Jan Pavelka" data-role="Vedoucí projektu">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Jan Pavelka</h4>
     <p class="team-card__role">Vedoucí projektu</p>
-    <a class="team-card__mail" href="mailto:pavelka@AQE.cz" data-no-modal>pavelka@AQE.cz</a>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Pochází z&nbsp;akademického prostředí — jako výzkumník na Univerzitě Palackého v&nbsp;Olomouci a&nbsp;VUT v&nbsp;Brně se věnoval vztahu mezi životním stylem, zdravím a&nbsp;kvalitou života u&nbsp;dětí a&nbsp;dospívajících. Podílel se na mezinárodní výzkumné síti HBSC a&nbsp;řídil výstavbu vědecko-technického parku BALUO. Působí jako projektový manažer a&nbsp;zabývá se metodikou spekulativního designu pro modelování budoucích scénářů regulatorních sandboxů.</template>
+    <a class="team-card__mail" href="mailto:pavelka@AQE.cz">pavelka@AQE.cz</a>
+    <p class="team-card__bio">Pochází z&nbsp;akademického prostředí — jako výzkumník na Univerzitě Palackého v&nbsp;Olomouci a&nbsp;VUT v&nbsp;Brně se věnoval vztahu mezi životním stylem, zdravím a&nbsp;kvalitou života u&nbsp;dětí a&nbsp;dospívajících. Podílel se na mezinárodní výzkumné síti HBSC a&nbsp;řídil výstavbu vědecko-technického parku BALUO. Působí jako projektový manažer a&nbsp;zabývá se metodikou spekulativního designu pro modelování budoucích scénářů regulatorních sandboxů.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/pavelka.jpg" alt="Jan Pavelka" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-<button type="button" class="team-card reveal" data-photo="img/team/bizkova.jpg" data-name="Rut Bízková" data-role="Regulatorní prostředí">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Rut Bízková</h4>
     <p class="team-card__role">Regulatorní prostředí</p>
-    <a class="team-card__mail" href="mailto:rut.bizkova@gmail.com" data-no-modal>rut.bizkova@gmail.com</a>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Zabývá se významem inovací pro regionální rozvoj, managementem výzkumu a&nbsp;vývoje a&nbsp;využitím nových znalostí pro rozvoj společnosti. Z&nbsp;původní profese — výzkumu v&nbsp;jaderné chemii — se postupně dostala k&nbsp;energetice, životnímu prostředí a&nbsp;udržitelnému rozvoji. Spoluautorka řady strategických dokumentů. Usiluje o&nbsp;propojení aktérů na národní, regionální a&nbsp;místní úrovni.</template>
+    <a class="team-card__mail" href="mailto:rut.bizkova@gmail.com">rut.bizkova@gmail.com</a>
+    <p class="team-card__bio">Zabývá se významem inovací pro regionální rozvoj, managementem výzkumu a&nbsp;vývoje a&nbsp;využitím nových znalostí pro rozvoj společnosti. Z&nbsp;původní profese — výzkumu v&nbsp;jaderné chemii — se postupně dostala k&nbsp;energetice, životnímu prostředí a&nbsp;udržitelnému rozvoji. Spoluautorka řady strategických dokumentů. Usiluje o&nbsp;propojení aktérů na národní, regionální a&nbsp;místní úrovni.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/bizkova.jpg" alt="Rut Bízková" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-<button type="button" class="team-card reveal" data-photo="img/team/becvar.jpg" data-name="Daniel Bečvář" data-role="Výzkum a&nbsp;analýzy">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Daniel Bečvář</h4>
     <p class="team-card__role">Výzkum a&nbsp;analýzy</p>
-    <a class="team-card__mail" href="mailto:becvar@i-lab.cz" data-no-modal>becvar@i-lab.cz</a>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Sociální geograf se zaměřením na regionální rozvoj. V&nbsp;současnosti studuje doktorský program geografie na Fakultě ekonomické ZČU. Své aktivity staví okolo rozvoje Karlovarského kraje — v&nbsp;dizertaci se zabývá faktory migrace vysokoškoláků z&nbsp;tohoto kraje. V&nbsp;rámci Institutu lázeňství a&nbsp;balneologie rozvíjí české poznání o&nbsp;regulatorních sandboxech. Hlavní autor první rešerše odborné literatury k&nbsp;tématu regulatorních sandboxů ve střední Evropě.</template>
+    <a class="team-card__mail" href="mailto:becvar@i-lab.cz">becvar@i-lab.cz</a>
+    <p class="team-card__bio">Sociální geograf se zaměřením na regionální rozvoj. V&nbsp;současnosti studuje doktorský program geografie na Fakultě ekonomické ZČU. Své aktivity staví okolo rozvoje Karlovarského kraje — v&nbsp;dizertaci se zabývá faktory migrace vysokoškoláků z&nbsp;tohoto kraje. V&nbsp;rámci Institutu lázeňství a&nbsp;balneologie rozvíjí české poznání o&nbsp;regulatorních sandboxech. Hlavní autor první rešerše odborné literatury k&nbsp;tématu regulatorních sandboxů ve střední Evropě.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/becvar.jpg" alt="Daniel Bečvář" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-<button type="button" class="team-card reveal" data-photo="img/team/kusakova.jpg" data-name="Kateřina Kusáková" data-role="Projektová podpora">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Kateřina Kusáková</h4>
     <p class="team-card__role">Projektová podpora</p>
     <span class="team-card__mail team-card__mail--empty">kontakt k&nbsp;doplnění</span>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Medailonek bude doplněn.</template>
+    <p class="team-card__bio">Medailonek bude doplněn.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/kusakova.jpg" alt="Kateřina Kusáková" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-<button type="button" class="team-card reveal" data-photo="img/team/smerdova.jpg" data-name="Aneta Šmerdová" data-role="Projektová podpora">
+<article class="team-card reveal">
   <div class="team-card__info">
     <h4 class="team-card__name">Aneta Šmerdová</h4>
     <p class="team-card__role">Projektová podpora</p>
-    <a class="team-card__mail" href="mailto:smerdova@AQE.cz" data-no-modal>smerdova@AQE.cz</a>
-    <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
-    <template class="team-card__bio-src">Medailonek bude doplněn.</template>
+    <a class="team-card__mail" href="mailto:smerdova@AQE.cz">smerdova@AQE.cz</a>
+    <p class="team-card__bio">Medailonek bude doplněn.</p>
   </div>
   <div class="team-card__photo"><img src="img/team/smerdova.jpg" alt="Aneta Šmerdová" onerror="this.style.display='none'"></div>
-</button>
+</article>
 
-</div>
-
-<!-- Tým modal -->
-<div id="team-modal" class="team-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="tm-name">
-  <div class="team-modal__backdrop" data-tm-close></div>
-  <div class="team-modal__dialog">
-    <button type="button" class="team-modal__close" aria-label="Zavřít" data-tm-close>
-      <span class="material-symbols-outlined">close</span>
-    </button>
-    <div class="team-modal__photo">
-      <img id="tm-photo" src="" alt="" onerror="this.style.display='none'">
-    </div>
-    <div class="team-modal__body">
-      <h3 class="team-modal__name" id="tm-name">—</h3>
-      <p class="team-modal__role" id="tm-role">—</p>
-      <p class="team-modal__bio" id="tm-bio"></p>
-    </div>
-  </div>
 </div>
 </div>
 </section>
@@ -1222,7 +1180,7 @@ Ozvěte se nám
   3) Formspree ti dá endpoint ve tvaru https://formspree.io/f/xxxxxxxx
   4) Ten xxxxxxxx kód vlož níž místo YOUR_FORMSPREE_ID
 -->
-<form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
+<form id="contact-form" action="https://formspree.io/f/myklpvgl" method="POST" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
 <!-- Hidden fields: kontrola pro Formspree -->
 <input type="hidden" name="_subject" value="Nový podnět – regulatornisandboxy.cz">
 <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
@@ -1283,6 +1241,7 @@ Ozvěte se nám
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#typy">Typologie a přístupy</a></li>
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#metodika">Metodika</a></li>
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#osa">Průběh projektu</a></li>
+        <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#svet">Sandboxy ve světě</a></li>
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="legislativa/">Legislativa</a></li>
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="priklady-ze-zahranici/">Příklady ze zahraničí</a></li>
         <li><a class="text-on-surface-variant hover:text-primary transition-colors" href="clanky/">Články</a></li>
@@ -1465,49 +1424,6 @@ Ozvěte se nám
 </script>
 <style>@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
 
-<!-- Tým — modal pro medailonek -->
-<script>
-(function(){
-  var modal = document.getElementById('team-modal');
-  if(!modal) return;
-  var cards = document.querySelectorAll('#team-grid .team-card');
-  var tmName  = document.getElementById('tm-name');
-  var tmRole  = document.getElementById('tm-role');
-  var tmBio   = document.getElementById('tm-bio');
-  var tmPhoto = document.getElementById('tm-photo');
-  function openModal(card){
-    var bioTpl = card.querySelector('.team-card__bio-src');
-    var photo = card.dataset.photo;
-    tmName.textContent = card.dataset.name || '';
-    tmRole.innerHTML   = card.dataset.role || '';
-    tmBio.innerHTML    = bioTpl ? bioTpl.innerHTML.trim() : '';
-    tmPhoto.src = photo || '';
-    tmPhoto.alt = card.dataset.name || '';
-    tmPhoto.style.display = '';
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-  cards.forEach(function(card){
-    card.addEventListener('click', function(e){
-      // Nechceme otvírat modal, pokud uživatel klikne na e-mail link v kartě
-      if(e.target.closest('[data-no-modal]')) return;
-      openModal(card);
-    });
-  });
-  modal.querySelectorAll('[data-tm-close]').forEach(function(el){
-    el.addEventListener('click', closeModal);
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
-  });
-})();
-</script>
 
 <!-- Sandbox Globe -->
 <script src="js/sandbox-globe.js"></script>
