@@ -171,22 +171,25 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .approach-col .approach-out{color:rgba(255,255,255,.45);font-size:12.5px;margin-top:4px;line-height:1.5}
 
 /* Tým — karty s fotkou vpravo, klik otevře modal */
-.team-card{display:grid;grid-template-columns:1fr 140px;gap:22px;background:#fff;padding:30px;border-radius:8px;border:1px solid rgba(26,26,26,.06);box-shadow:0 1px 2px rgba(26,26,26,.03);transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;cursor:pointer;text-align:left;width:100%;font-family:inherit;align-items:stretch}
+.team-card{display:grid;grid-template-columns:1fr 130px;gap:22px;background:#fff;padding:22px 24px;border-radius:8px;border:1px solid rgba(26,26,26,.06);box-shadow:0 1px 2px rgba(26,26,26,.03);transition:transform .25s ease,box-shadow .25s ease,border-color .2s ease;cursor:pointer;text-align:left;width:100%;font-family:inherit;align-items:stretch}
 .team-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px -14px rgba(26,26,26,.16);border-color:rgba(26,26,26,.14)}
 .team-card:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .team-card__info{display:flex;flex-direction:column;min-width:0}
-.team-card__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.01em;color:#1a1a1a;margin:0 0 8px}
-.team-card__role{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 18px}
-.team-card__cta{margin-top:auto;font-size:12.5px;color:var(--ink-2);font-weight:500;display:inline-flex;align-items:center;gap:4px;padding:0;background:transparent;border:0;font-family:inherit;transition:color .2s;align-self:flex-start}
-.team-card:hover .team-card__cta{color:var(--green)}
+.team-card__name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.1;letter-spacing:-.01em;color:#1a1a1a;margin:0 0 6px}
+.team-card__role{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 12px}
+.team-card__mail{font-size:12.5px;color:var(--ink-2);font-weight:500;font-family:'JetBrains Mono','Plus Jakarta Sans',monospace;letter-spacing:-.01em;word-break:break-all;text-decoration:none;transition:color .15s;display:inline-block;padding:2px 0;margin-bottom:8px}
+.team-card__mail:hover{color:var(--green)}
+.team-card__mail--empty{color:var(--muted);font-style:italic;font-family:inherit;font-size:11.5px}
+.team-card__cta{margin-top:auto;font-size:12.5px;color:var(--green);font-weight:600;display:inline-flex;align-items:center;gap:4px;padding:0;background:transparent;border:0;font-family:inherit;transition:color .2s;align-self:flex-start}
+.team-card:hover .team-card__cta{color:var(--green-dark)}
 .team-card__cta .material-symbols-outlined{font-size:16px;transition:transform .2s}
 .team-card:hover .team-card__cta .material-symbols-outlined{transform:translateX(3px)}
-.team-card__photo{width:140px;min-height:180px;background:linear-gradient(135deg,#f0ece4,#e8e4de);border-radius:4px;overflow:hidden;flex-shrink:0;position:relative}
+.team-card__photo{width:130px;height:200px;background:linear-gradient(135deg,#f0ece4,#e8e4de);border-radius:4px;overflow:hidden;flex-shrink:0;position:relative;align-self:center}
 .team-card__photo::after{content:'';position:absolute;inset:0;border:1px solid rgba(26,26,26,.06);border-radius:4px;pointer-events:none}
-.team-card__photo img{width:100%;height:100%;object-fit:cover;display:block}
+.team-card__photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
 @media(max-width:640px){
-  .team-card{grid-template-columns:1fr;gap:18px;padding:24px}
-  .team-card__photo{width:120px;min-height:150px;order:-1}
+  .team-card{grid-template-columns:1fr;gap:16px;padding:22px}
+  .team-card__photo{width:120px;height:160px;order:-1}
 }
 
 /* Tým modal — klik na kartu otevře medailonek + velkou fotku */
@@ -301,9 +304,10 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .nav a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;background:#fff;border-radius:2px;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.16,1,.3,1)}
 .nav a.is-active::after{transform:scaleX(1)}
 .nav a:hover{color:#fff}
-.site-header.scrolled .nav a{color:var(--ink-2)}
-.site-header.scrolled .nav a:hover{color:var(--green)}
-.site-header.scrolled .nav a::after{background:var(--green)}
+.site-header.scrolled .nav a:not(.btn){color:var(--ink-2)}
+.site-header.scrolled .nav a:not(.btn):hover{color:var(--green)}
+.site-header.scrolled .nav a:not(.btn)::after{background:var(--green)}
+.nav a.btn-primary{color:#fff}
 .menu-btn{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:8px;margin-left:auto;z-index:101}
 .menu-btn span{display:block;width:26px;height:2px;background:#fff;transition:background .3s}
 .site-header.scrolled .menu-btn span{background:var(--ink)}
@@ -1086,6 +1090,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Jan Havránek</h4>
     <p class="team-card__role">Strategický rozvoj</p>
+    <a class="team-card__mail" href="mailto:havranek@AQE.cz" data-no-modal>havranek@AQE.cz</a>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Působí jako ředitel AQE advisors, a.s. a&nbsp;specialista na strategický rozvoj ve&nbsp;veřejné správě. Více než dvě dekády se věnuje propojování inovací s&nbsp;regulatorním prostředím — od&nbsp;řízení strukturálních fondů na&nbsp;MPSV a&nbsp;Ministerstvu vnitra přes poradenství pro TA&nbsp;ČR až po rozvoj nástrojů pro efektivní správu měst a&nbsp;obcí. Ph.D. získal na&nbsp;Mendelově univerzitě v&nbsp;Brně za&nbsp;výzkum zaměřený na zefektivnění řízení organizací veřejné správy. Odpovídá za&nbsp;strategický rozvoj a&nbsp;propojení metodiky regulačních prostředí s&nbsp;českou institucionální praxí.</template>
   </div>
@@ -1096,6 +1101,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Jan Pavelka</h4>
     <p class="team-card__role">Vedoucí projektu</p>
+    <a class="team-card__mail" href="mailto:pavelka@AQE.cz" data-no-modal>pavelka@AQE.cz</a>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Pochází z&nbsp;akademického prostředí — jako výzkumník na Univerzitě Palackého v&nbsp;Olomouci a&nbsp;VUT v&nbsp;Brně se věnoval vztahu mezi životním stylem, zdravím a&nbsp;kvalitou života u&nbsp;dětí a&nbsp;dospívajících. Podílel se na mezinárodní výzkumné síti HBSC a&nbsp;řídil výstavbu vědecko-technického parku BALUO. Působí jako projektový manažer a&nbsp;zabývá se metodikou spekulativního designu pro modelování budoucích scénářů regulatorních sandboxů.</template>
   </div>
@@ -1106,6 +1112,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Rut Bízková</h4>
     <p class="team-card__role">Regulatorní prostředí</p>
+    <a class="team-card__mail" href="mailto:rut.bizkova@gmail.com" data-no-modal>rut.bizkova@gmail.com</a>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Zabývá se významem inovací pro regionální rozvoj, managementem výzkumu a&nbsp;vývoje a&nbsp;využitím nových znalostí pro rozvoj společnosti. Z&nbsp;původní profese — výzkumu v&nbsp;jaderné chemii — se postupně dostala k&nbsp;energetice, životnímu prostředí a&nbsp;udržitelnému rozvoji. Spoluautorka řady strategických dokumentů. Usiluje o&nbsp;propojení aktérů na národní, regionální a&nbsp;místní úrovni.</template>
   </div>
@@ -1116,6 +1123,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Daniel Bečvář</h4>
     <p class="team-card__role">Výzkum a&nbsp;analýzy</p>
+    <a class="team-card__mail" href="mailto:becvar@i-lab.cz" data-no-modal>becvar@i-lab.cz</a>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Sociální geograf se zaměřením na regionální rozvoj. V&nbsp;současnosti studuje doktorský program geografie na Fakultě ekonomické ZČU. Své aktivity staví okolo rozvoje Karlovarského kraje — v&nbsp;dizertaci se zabývá faktory migrace vysokoškoláků z&nbsp;tohoto kraje. V&nbsp;rámci Institutu lázeňství a&nbsp;balneologie rozvíjí české poznání o&nbsp;regulatorních sandboxech. Hlavní autor první rešerše odborné literatury k&nbsp;tématu regulatorních sandboxů ve střední Evropě.</template>
   </div>
@@ -1126,6 +1134,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Kateřina Kusáková</h4>
     <p class="team-card__role">Projektová podpora</p>
+    <span class="team-card__mail team-card__mail--empty">kontakt k&nbsp;doplnění</span>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Medailonek bude doplněn.</template>
   </div>
@@ -1136,6 +1145,7 @@ Ozvěte se nám
   <div class="team-card__info">
     <h4 class="team-card__name">Aneta Šmerdová</h4>
     <p class="team-card__role">Projektová podpora</p>
+    <span class="team-card__mail team-card__mail--empty">kontakt k&nbsp;doplnění</span>
     <span class="team-card__cta">Medailonek <span class="material-symbols-outlined">arrow_forward</span></span>
     <template class="team-card__bio-src">Medailonek bude doplněn.</template>
   </div>
@@ -1413,7 +1423,11 @@ Odeslat podnět
     document.body.style.overflow = '';
   }
   cards.forEach(function(card){
-    card.addEventListener('click', function(){ openModal(card); });
+    card.addEventListener('click', function(e){
+      // Nechceme otvírat modal, pokud uživatel klikne na e-mail link v kartě
+      if(e.target.closest('[data-no-modal]')) return;
+      openModal(card);
+    });
   });
   modal.querySelectorAll('[data-tm-close]').forEach(function(el){
     el.addEventListener('click', closeModal);
