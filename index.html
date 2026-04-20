@@ -39,7 +39,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 
 /* Partner kompaktní karty */
-.partner-card{cursor:pointer;background:#fff;border:1px solid rgba(26,26,26,.08);padding:22px 18px 20px;border-radius:4px;transition:transform .25s ease,background-color .25s ease,border-color .2s ease;font-family:inherit;text-align:left;position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.partner-card{cursor:pointer;background:#fff;border:1px solid rgba(26,26,26,.08);padding:22px 18px 20px;border-radius:8px;transition:transform .25s ease,background-color .25s ease,border-color .2s ease;font-family:inherit;text-align:left;position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:0}
 .partner-card:hover{transform:translateY(-3px);border-color:rgba(26,26,26,.22)}
 .partner-card:focus-visible{outline:2px solid var(--green);outline-offset:3px}
 .partner-card--active{background:#1a1a1a!important;border-color:#1a1a1a!important}
@@ -57,8 +57,8 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 :root{--green:#c44536;--green-dark:#a23825;--green-deep:#1a1a1a;--green-soft:#f5f5f5;--ink:#1a1a1a;--ink-2:#3a3d35;--muted:#6c6f65;--line:#e5e4dc;--font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--serif:'Fraunces','Noto Serif',Georgia,serif}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-feature-settings:"tnum" 1}
 
-/* Section numbering — editorial eyebrow */
-.section-num{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:var(--green);font-weight:500;margin-bottom:10px;text-transform:uppercase;display:block}
+/* Section numbering — editorial eyebrow (Fraunces italic) */
+.section-num{font-family:'Fraunces','Noto Serif',Georgia,serif;font-style:italic;font-size:18px;letter-spacing:-.005em;color:var(--green);font-weight:400;margin-bottom:10px;display:block}
 
 /* Typologie — editorial rows */
 .type-rows{display:flex;flex-direction:column}
@@ -160,8 +160,14 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 /* Scroll progress bar — thin coral line under header */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--green) 0%,var(--green-dark) 100%);z-index:200;transition:width .08s linear;pointer-events:none;box-shadow:0 0 10px rgba(196,69,54,.4)}
 
+/* Lifecycle dark block (Jak vzniká sandbox) — stejný pattern jako approaches */
+.lifecycle-block{position:relative;background:#1a1a1a;color:#fff;border-radius:8px;padding:56px 40px;overflow:hidden}
+.lifecycle-block::before{content:'';position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:radial-gradient(ellipse at center,rgba(196,69,54,.18) 0%,transparent 60%);pointer-events:none}
+.lifecycle-block > *{position:relative;z-index:1}
+.lifecycle-num{font-family:'Fraunces','Noto Serif',Georgia,serif;font-style:italic;font-weight:300;font-size:56px;line-height:1;color:var(--green);margin-bottom:18px;letter-spacing:-.03em;position:relative;z-index:10}
+
 /* Approaches dark block (3 přístupy) */
-.approaches{position:relative;background:#1a1a1a;color:#fff;border-radius:4px;padding:56px 40px;overflow:hidden}
+.approaches{position:relative;background:#1a1a1a;color:#fff;border-radius:8px;padding:56px 40px;overflow:hidden}
 .approaches::before{content:'';position:absolute;top:-50%;right:-10%;width:60%;height:200%;background:radial-gradient(ellipse at center,rgba(196,69,54,.18) 0%,transparent 60%);pointer-events:none}
 .approach-col h4{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:.22em;margin-bottom:14px;color:#fff}
 .approach-col .big{font-family:'Fraunces','Noto Serif',serif;font-weight:300;font-style:italic;font-size:34px;line-height:1;color:var(--green);margin-bottom:20px;letter-spacing:-.02em}
@@ -209,11 +215,11 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .btn-ghost-light:hover{background:rgba(255,255,255,.1);border-color:#fff}
 
 /* =========== HERO (from original) =========== */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;color:#fff;isolation:isolate}
+.hero{position:relative;min-height:calc(100vh - 50px);display:flex;align-items:center;overflow:hidden;color:#fff;isolation:isolate}
 .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 55%,#404040 100%);z-index:-2}
 .hero-bg::before{content:'';position:absolute;inset:0;background:url(img/hero-bg.png) center/cover no-repeat;opacity:.55;mix-blend-mode:luminosity}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,26,12,.35) 0%,rgba(20,26,12,.78) 100%);z-index:-1}
-.hero-inner{position:relative;padding:180px 32px 160px;max-width:1180px;width:100%;margin:0 auto}
+.hero-inner{position:relative;padding:130px 32px 160px;max-width:1180px;width:100%;margin:0 auto}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:40px;font-weight:500;padding-left:44px;position:relative}
 .hero-eyebrow::before{content:'';position:absolute;left:0;top:50%;width:32px;height:1px;background:rgba(255,255,255,.6)}
 .hero-title{font-size:clamp(44px,7vw,92px);font-weight:400;letter-spacing:-.035em;line-height:1.04;margin-bottom:32px;max-width:18ch}
@@ -265,8 +271,8 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="hero-inner">
     <span class="hero-eyebrow">AQE advisors · 2024–2026</span>
     <h1 class="hero-title hero-title--animated">
-      <span class="hw">Regulatorní</span> <span class="hw">sandboxy</span><br>
-      <span class="hw serif-it">neboli</span> <span class="hw serif-it">regulační</span> <span class="hw">prostředí</span>
+      <span class="hw serif-it">Regulatorní</span> <span class="hw serif-it">sandboxy</span><br>
+      <span class="hw">neboli</span> <span class="hw">regulační</span> <span class="hw">prostředí</span>
     </h1>
     <p class="hero-lead">
       Prostor pro bezpečné testování inovací pod dohledem státu — ve všech oblastech života společnosti.
@@ -459,7 +465,7 @@ Regulační prostředí (regulatorní sandbox) je časově omezené testovací p
 </div>
 
 <!-- Accordions -->
-<div class="grid md:grid-cols-2 gap-3 mb-20 items-start">
+<div class="grid md:grid-cols-3 gap-3 mb-20 items-start">
 <details class="bg-surface p-6 rounded-xl border border-outline-variant/10 reveal">
 <summary class="flex items-center justify-between font-semibold text-primary">
 <span class="flex items-center gap-3"><span class="material-symbols-outlined text-secondary">gavel</span> Kdo je regulátor?</span>
@@ -544,7 +550,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 <!-- 3 typy — původní karty 01/02/03 -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 items-start">
 <div class="bg-surface-container-low p-10 rounded-xl border-l-4 border-primary hover:-translate-y-2 transition-transform duration-300 reveal">
-<span class="font-label text-primary/30 text-4xl font-bold mb-6 block">01</span>
+<span class="font-headline italic text-5xl font-light mb-6 block" style="font-weight:300;color:var(--green)">01</span>
 <h3 class="font-headline text-2xl mb-3">Průzkumný</h3>
 <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Objevování a&nbsp;testování nových řešení, kde regulátor teprve získává zkušenosti.</p>
 <details>
@@ -553,7 +559,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 </details>
 </div>
 <div class="bg-surface-container-low p-10 rounded-xl border-l-4 border-primary hover:-translate-y-2 transition-transform duration-300 reveal">
-<span class="font-label text-primary/30 text-4xl font-bold mb-6 block">02</span>
+<span class="font-headline italic text-5xl font-light mb-6 block" style="font-weight:300;color:var(--green)">02</span>
 <h3 class="font-headline text-2xl mb-3">Potvrzující</h3>
 <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Ověření, že již vyvinuté řešení funguje a&nbsp;může být bezpečně nasazeno do praxe.</p>
 <details>
@@ -562,7 +568,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 </details>
 </div>
 <div class="bg-surface-container-low p-10 rounded-xl border-l-4 border-primary hover:-translate-y-2 transition-transform duration-300 reveal">
-<span class="font-label text-primary/30 text-4xl font-bold mb-6 block">03</span>
+<span class="font-headline italic text-5xl font-light mb-6 block" style="font-weight:300;color:var(--green)">03</span>
 <h3 class="font-headline text-2xl mb-3">Na poptávku</h3>
 <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Regulátor sám vymezuje prioritní témata a&nbsp;motivuje k&nbsp;experimentům.</p>
 <details>
@@ -626,29 +632,30 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 </div>
 </div>
 </div>
-<!-- Horizontal 4 steps -->
-<div class="relative editorial-grid mb-16">
-<div class="absolute top-[3.5rem] left-0 w-full h-[1px] bg-primary/20 hidden lg:block"></div>
-<div class="col-span-12 lg:col-span-3 relative reveal">
-<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-6 relative z-10 shadow-lg">1</div>
-<h4 class="font-headline text-xl mb-3 italic">Identifikace podnětu</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">Někdo přijde s&nbsp;nápadem, který naráží na legislativu. Posoudí se, zda je sandbox vhodný nástroj.</p>
-</div>
-<div class="col-span-12 lg:col-span-3 relative reveal">
-<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-6 relative z-10 shadow-lg">2</div>
-<h4 class="font-headline text-xl mb-3 italic">Rozhodnutí regulátora</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">Regulátor stanoví parametry: délku, cíle, indikátory, rozsah dozoru a&nbsp;výjimky z legislativy.</p>
-</div>
-<div class="col-span-12 lg:col-span-3 relative reveal">
-<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-6 relative z-10 shadow-lg">3</div>
-<h4 class="font-headline text-xl mb-3 italic">Realizace a monitoring</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">Testování v reálných podmínkách pod dohledem. Průběžně se sbírají data a&nbsp;zpětná vazba.</p>
-</div>
-<div class="col-span-12 lg:col-span-3 relative reveal">
-<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold mb-6 relative z-10 shadow-lg">4</div>
-<h4 class="font-headline text-xl mb-3 italic">Regulatorní učení</h4>
-<p class="text-on-surface-variant text-sm leading-relaxed">Nejdůležitější fáze. Regulátor vyhodnocuje výsledky a rozhoduje: úprava legislativy, rozšíření, nebo zamítnutí.</p>
-</div>
+<!-- Lifecycle — dark block s red gradient -->
+<div class="lifecycle-block mb-16">
+  <div class="relative editorial-grid">
+    <div class="col-span-12 lg:col-span-3 relative reveal">
+      <div class="lifecycle-num">1</div>
+      <h4 class="font-headline text-xl mb-3 italic" style="color:#fff">Identifikace podnětu</h4>
+      <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.72)">Někdo přijde s&nbsp;nápadem, který naráží na legislativu. Posoudí se, zda je sandbox vhodný nástroj.</p>
+    </div>
+    <div class="col-span-12 lg:col-span-3 relative reveal">
+      <div class="lifecycle-num">2</div>
+      <h4 class="font-headline text-xl mb-3 italic" style="color:#fff">Rozhodnutí regulátora</h4>
+      <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.72)">Regulátor stanoví parametry: délku, cíle, indikátory, rozsah dozoru a&nbsp;výjimky z legislativy.</p>
+    </div>
+    <div class="col-span-12 lg:col-span-3 relative reveal">
+      <div class="lifecycle-num">3</div>
+      <h4 class="font-headline text-xl mb-3 italic" style="color:#fff">Realizace a monitoring</h4>
+      <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.72)">Testování v reálných podmínkách pod dohledem. Průběžně se sbírají data a&nbsp;zpětná vazba.</p>
+    </div>
+    <div class="col-span-12 lg:col-span-3 relative reveal">
+      <div class="lifecycle-num">4</div>
+      <h4 class="font-headline text-xl mb-3 italic" style="color:#fff">Regulatorní učení</h4>
+      <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.72)">Nejdůležitější fáze. Regulátor vyhodnocuje výsledky a rozhoduje: úprava legislativy, rozšíření, nebo zamítnutí.</p>
+    </div>
+  </div>
 </div>
 
 <!-- Accordions pod metodikou -->

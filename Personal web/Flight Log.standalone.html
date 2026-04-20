@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Flight Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07090c;
+    --bg-2: #0d1117;
+    --panel: #10151c;
+    --panel-2: #161d26;
+    --border: #1d2631;
+    --border-2: #2a3543;
+    --text: #e6edf5;
+    --text-2: #8b97a8;
+    --text-3: #5a6577;
+    --accent: #22d3ee;
+    --accent-2: #06b6d4;
+    --warn: #f59e0b;
+    --land: #151c26;
+    --land-stroke: #2a3543;
+    --route: #22d3ee;
+    --font: 'Geist', -apple-system, system-ui, sans-serif;
+    --mono: 'Geist Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 13px; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; padding: 0; }
+  input, select { font: inherit; color: inherit; }
+
+  /* App grid */
+  .app {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    grid-template-rows: 48px 1fr;
+    height: 100vh;
+  }
+
+  /* Top bar */
+  .topbar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-2);
+    gap: 16px;
+    z-index: 10;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  .brand-sep { width: 1px; height: 20px; background: var(--border); }
+  .brand-sub { font-family: var(--mono); font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .top-tabs { display: flex; gap: 4px; margin-left: 24px; }
+  .top-tab {
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--text-2);
+    border-radius: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .top-tab:hover { color: var(--text); background: var(--panel); }
+  .top-tab.active { color: var(--text); background: var(--panel); }
+  .top-tab .n { font-family: var(--mono); font-size: 10px; color: var(--text-3); }
+  .top-tab.active .n { color: var(--accent); }
+
+  .top-right { margin-left: auto; display: flex; align-items: center; gap: 16px; font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+  .top-right .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .icon-btn {
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-2);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .icon-btn:hover { color: var(--text); border-color: var(--border-2); background: var(--panel); }
+
+  /* Sidebar */
+  .sidebar {
+    background: var(--bg-2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-2) transparent;
+  }
+  .sidebar::-webkit-scrollbar { width: 8px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+
+  /* Map area */
+  .map-area {
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, #0b1219 0%, #050709 100%);
+  }
+  #globe-canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+  #globe-canvas.grabbing { cursor: grabbing; }
+
+  /* Overlay in map */
+  .map-overlay {
+    position: absolute;
+    pointer-events: none;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+  }
+  .ovl-tl { top: 16px; left: 16px; }
+  .ovl-tr { top: 16px; right: 16px; text-align: right; }
+  .ovl-bl { bottom: 16px; left: 16px; }
+  .ovl-br { bottom: 16px; right: 16px; text-align: right; }
+
+  .map-controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: auto;
+  }
+  .mc-btn {
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(13,17,23,0.8);
+    backdrop-filter: blur(8px);
+    color: var(--text-2);
+    font-family: var(--mono);
+    font-size: 14px;
+  }
+  .mc-btn:hover { color: var(--text); border-color: var(--accent); background: rgba(34,211,238,0.08); }
+  .mc-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(34,211,238,0.08); }
+
+  .legend {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(13,17,23,0.82);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-2);
+    letter-spacing: 0.05em;
+    min-width: 200px;
+  }
+  .legend h4 { font-family: var(--font); font-size: 11px; font-weight: 500; color: var(--text); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .legend-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .legend-line { width: 18px; height: 2px; }
+
+  /* Fullscreen map mode hides sidebar */
+  .app.fullscreen { grid-template-columns: 0 1fr; }
+  .app.fullscreen .sidebar { display: none; }
+
+  /* Panels */
+  .panel { display: none; padding: 20px; }
+  .panel.active { display: block; }
+  .panel-section { margin-bottom: 28px; }
+  .panel h2 {
+    font-size: 11px; font-weight: 500; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .panel h2 .count { font-family: var(--mono); color: var(--text-3); font-weight: 400; }
+
+  /* Hero stats */
+  .hero {
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-lead { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 12px; }
+  .hero-big { font-size: 42px; line-height: 1; font-weight: 600; letter-spacing: -0.03em; }
+  .hero-sub { color: var(--text-2); margin-top: 8px; font-size: 13px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .hs-cell { padding: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; }
+  .hs-l { font-family: var(--mono); font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; }
+  .hs-n { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .hs-n .u { font-family: var(--mono); font-size: 11px; color: var(--text-3); font-weight: 400; margin-left: 4px; }
+
+  /* List items */
+  .list { display: flex; flex-direction: column; gap: 1px; }
+  .li {
+    padding: 10px 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s;
+  }
+  .li:hover { border-color: var(--accent); background: rgba(34,211,238,0.05); }
+  .li.active { border-color: var(--accent); background: rgba(34,211,238,0.08); }
+  .li-title { font-weight: 500; }
+  .li-meta { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-top: 3px; letter-spacing: 0.03em; }
+  .li-val { font-family: var(--mono); font-size: 11px; color: var(--text-2); text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Route item with bar */
+  .rt-bar {
+    height: 2px; background: var(--border); border-radius: 1px; margin-top: 6px;
+  }
+  .rt-bar-fill { height: 100%; background: var(--accent); border-radius: 1px; }
+
+  /* Controls */
+  .controls {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ctrl {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+  }
+  .ctrl select, .ctrl input {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-family: var(--font);
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: 0;
+    outline: none;
+  }
+  .ctrl select:focus, .ctrl input:focus { border-color: var(--accent); }
+  .ctrl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Bars */
+  .bars { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row { }
+  .bar-label { font-size: 12px; display: flex; justify-content: space-between; align-items: baseline; }
+  .bar-label .n { font-family: var(--mono); color: var(--text-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .bar-track { height: 3px; background: var(--border); margin-top: 6px; border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+
+  /* Flight info popover */
+  .flight-popover {
+    position: absolute;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 14px 16px;
+    width: 280px;
+    z-index: 20;
+    pointer-events: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,211,238,0.15);
+    display: none;
+  }
+  .flight-popover.on { display: block; }
+  .fp-close { position: absolute; top: 10px; right: 10px; color: var(--text-3); font-size: 14px; }
+  .fp-close:hover { color: var(--text); }
+  .fp-route { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .fp-route .arr { color: var(--accent); margin: 0 6px; font-weight: 400; }
+  .fp-cities { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-top: 3px; letter-spacing: 0.05em; }
+  .fp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .fp-k { font-family: var(--mono); font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .fp-v { font-size: 12px; margin-top: 2px; }
+  .fp-count { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-top: 8px; padding: 6px 8px; background: rgba(34,211,238,0.08); border-radius: 5px; border: 1px solid rgba(34,211,238,0.2); }
+
+  /* Table (Flights tab) */
+  .table-wrap { overflow-x: auto; }
+  table.ft { width: 100%; border-collapse: collapse; }
+  .ft th {
+    font-family: var(--mono); font-size: 9px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.12em;
+    text-align: left; padding: 10px 8px; font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+    position: sticky; top: 0; background: var(--bg-2); z-index: 2;
+  }
+  .ft th:hover { color: var(--text); }
+  .ft th.sorted { color: var(--accent); }
+  .ft th.num, .ft td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .ft td { padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: 12px; }
+  .ft tr { cursor: pointer; }
+  .ft tr:hover td { background: rgba(34,211,238,0.04); }
+  .ft tr.active td { background: rgba(34,211,238,0.08); }
+  .ft-route-cell { font-weight: 500; }
+  .ft-route-cell .arr { color: var(--accent); margin: 0 4px; }
+  .ft-cities-sm { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-top: 2px; }
+
+  /* Country grid */
+  .cg { display: flex; flex-direction: column; gap: 1px; }
+  .cg-item {
+    padding: 10px 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    display: grid; grid-template-columns: 32px 1fr auto; gap: 10px; align-items: center;
+  }
+  .cg-item:hover { border-color: var(--accent); }
+  .cg-flag { font-size: 22px; line-height: 1; }
+  .cg-name { font-weight: 500; }
+  .cg-sub { font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-top: 2px; }
+  .cg-n { font-family: var(--mono); font-size: 11px; color: var(--text-2); }
+
+  /* Year review */
+  .yr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .yr-card { padding: 14px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; }
+  .yr-l { font-family: var(--mono); font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; }
+  .yr-big { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .yr-d { font-family: var(--mono); font-size: 10px; color: var(--accent); margin-top: 4px; }
+  .yr-d.neg { color: var(--warn); }
+
+  /* Bucket */
+  .bk { display: flex; flex-direction: column; gap: 1px; }
+  .bk-item { padding: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 8px; display: grid; grid-template-columns: 24px 1fr auto; gap: 10px; align-items: start; font-size: 12px; }
+  .bk-n { font-family: var(--mono); font-size: 10px; color: var(--text-3); }
+  .bk-place { font-weight: 500; }
+  .bk-why { font-size: 11px; color: var(--text-2); margin-top: 3px; }
+  .bk-tag { font-family: var(--mono); font-size: 9px; color: var(--text-3); padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; white-space: nowrap; }
+
+  /* Empty state */
+  .empty { color: var(--text-3); font-size: 12px; text-align: center; padding: 24px; }
+
+  /* Scrollbar global */
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: 48px 40vh 1fr; }
+    .sidebar { grid-row: 3; border-right: none; border-top: 1px solid var(--border); }
+    .map-area { grid-row: 2; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>Flight Log</span>
+    </div>
+    <div class="brand-sep"></div>
+    <div class="brand-sub" id="brand-sub">— · —</div>
+
+    <div class="top-tabs" id="top-tabs">
+      <button class="top-tab active" data-tab="overview"><span class="n">01</span>Přehled</button>
+      <button class="top-tab" data-tab="flights"><span class="n">02</span>Lety</button>
+      <button class="top-tab" data-tab="countries"><span class="n">03</span>Země</button>
+      <button class="top-tab" data-tab="taste"><span class="n">04</span>Preference</button>
+      <button class="top-tab" data-tab="review"><span class="n">05</span>2026</button>
+      <button class="top-tab" data-tab="bucket"><span class="n">06</span>Bucket</button>
+    </div>
+
+    <div class="top-right">
+      <span class="dot"></span>
+      <span id="br-stats">—</span>
+      <button class="icon-btn" id="fs-toggle" title="Fullscreen globe">⛶</button>
+    </div>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <!-- Overview -->
+    <div class="panel active" data-panel="overview">
+      <div class="hero">
+        <div class="hero-lead">Personal flight archive</div>
+        <div class="hero-big" id="hero-big">—</div>
+        <div class="hero-sub" id="hero-sub">—</div>
+        <div class="hero-grid">
+          <div class="hs-cell"><div class="hs-l">Vzdálenost</div><div class="hs-n" id="hs-km">—<span class="u">km</span></div></div>
+          <div class="hs-cell"><div class="hs-l">Ve vzduchu</div><div class="hs-n" id="hs-hrs">—<span class="u">h</span></div></div>
+          <div class="hs-cell"><div class="hs-l">Zemí</div><div class="hs-n" id="hs-countries">—</div></div>
+          <div class="hs-cell"><div class="hs-l">Kolem Země</div><div class="hs-n" id="hs-globe">—<span class="u">×</span></div></div>
+        </div>
+      </div>
+
+      <div style="padding: 20px;">
+        <div class="panel-section">
+          <h2>Nejčastější trasy <span class="count" id="rt-count">—</span></h2>
+          <div class="list" id="top-routes"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Roky</h2>
+          <div class="bars" id="years-bars"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Rekordy</h2>
+          <div class="list" id="records-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flights -->
+    <div class="panel" data-panel="flights">
+      <div class="controls">
+        <div class="ctrl-row">
+          <select id="f-year"><option value="">Všechny roky</option></select>
+          <select id="f-airline"><option value="">Všechny aerolinky</option></select>
+        </div>
+        <input id="f-search" placeholder="Hledat letiště, město, letadlo…">
+      </div>
+      <div style="padding: 12px 20px; font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; display: flex; justify-content: space-between;">
+        <span><span id="ft-count">—</span> letů</span>
+        <button class="icon-btn" id="f-clear" style="width: auto; padding: 0 8px; height: 22px; font-size: 10px;">Reset</button>
+      </div>
+      <div class="table-wrap" style="padding: 0 20px 20px;">
+        <table class="ft">
+          <thead>
+            <tr>
+              <th data-sort="date">Datum</th>
+              <th data-sort="route">Trasa</th>
+              <th data-sort="duration" class="num">Čas</th>
+              <th data-sort="distance" class="num">Km</th>
+            </tr>
+          </thead>
+          <tbody id="ft-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Countries -->
+    <div class="panel" data-panel="countries">
+      <div style="padding: 20px;">
+        <div class="panel-section">
+          <h2>Navštívené země <span class="count" id="cn-count">—</span></h2>
+          <div class="cg" id="cn-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Taste -->
+    <div class="panel" data-panel="taste">
+      <div style="padding: 20px;">
+        <div class="panel-section">
+          <h2>Aerolinky</h2>
+          <div class="bars" id="b-airlines"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Letadla</h2>
+          <div class="bars" id="b-aircraft"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Sedadla</h2>
+          <div class="bars" id="b-seat"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Nejčastější letiště</h2>
+          <div class="bars" id="b-airports"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review -->
+    <div class="panel" data-panel="review">
+      <div style="padding: 20px;">
+        <div class="panel-section">
+          <h2>2026 vs. 2025</h2>
+          <div class="yr" id="yr-grid"></div>
+        </div>
+        <div class="panel-section">
+          <h2>Nové destinace 2026</h2>
+          <div class="list" id="yr-new"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bucket -->
+    <div class="panel" data-panel="bucket">
+      <div style="padding: 20px;">
+        <div class="panel-section">
+          <h2>Bucket list</h2>
+          <div class="bk" id="bk-list"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="map-area">
+    <canvas id="globe-canvas"></canvas>
+
+    <div class="map-controls">
+      <button class="mc-btn" id="mc-zoomin" title="Přiblížit">+</button>
+      <button class="mc-btn" id="mc-zoomout" title="Oddálit">−</button>
+      <button class="mc-btn" id="mc-reset" title="Reset">↺</button>
+      <button class="mc-btn" id="mc-spin" title="Auto rotace">◐</button>
+      <button class="mc-btn" id="mc-fs" title="Fullscreen">⛶</button>
+    </div>
+
+    <div class="map-overlay ovl-tl">FLIGHT LOG · ORTHOGRAPHIC</div>
+    <div class="map-overlay ovl-tr" id="ovl-coords">LAT — · LON —</div>
+
+    <div class="legend">
+      <h4>Legenda</h4>
+      <div class="legend-row"><span class="legend-dot" style="background:#22d3ee"></span><span>Letiště (click)</span></div>
+      <div class="legend-row"><span class="legend-line" style="background:#22d3ee"></span><span>Trasa (click)</span></div>
+      <div class="legend-row"><span class="legend-line" style="background:#2a3543"></span><span>Hranice států</span></div>
+      <div class="legend-row" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);color:var(--text-3)">
+        <span>Drag · Scroll · Click</span>
+      </div>
+    </div>
+
+    <div class="flight-popover" id="popover">
+      <button class="fp-close" id="fp-close">×</button>
+      <div class="fp-route" id="fp-route">—</div>
+      <div class="fp-cities" id="fp-cities">—</div>
+      <div class="fp-count" id="fp-count">—</div>
+      <div class="fp-grid" id="fp-grid"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data.js?v=4"></script>
+<script src="globe.js?v=4"></script>
+<script src="app.js?v=4"></script>
+</body>
+</html>
