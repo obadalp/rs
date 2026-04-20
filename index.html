@@ -174,6 +174,52 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 .approach-col p{color:rgba(255,255,255,.78);font-size:14.5px;line-height:1.55;margin-bottom:12px}
 .approach-col .approach-out{color:rgba(255,255,255,.45);font-size:12.5px;margin-top:4px;line-height:1.5}
 
+/* Globus (Ve světě) — dark block s radial clay gradient */
+.globe-wrap{position:relative;background:#1a1a1a;color:#fff;border-radius:8px;overflow:hidden;isolation:isolate}
+.globe-wrap::before{content:'';position:absolute;top:-30%;right:-20%;width:70%;height:160%;background:radial-gradient(ellipse at center,rgba(196,69,54,.14) 0%,transparent 65%);pointer-events:none;z-index:0}
+.globe-wrap::after{content:'';position:absolute;bottom:-30%;left:-20%;width:60%;height:140%;background:radial-gradient(ellipse at center,rgba(13,110,126,.06) 0%,transparent 65%);pointer-events:none;z-index:0}
+.globe-head{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:36px 40px 18px;flex-wrap:wrap}
+.globe-head .eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:10px;display:block}
+.globe-head h2{font-family:'Fraunces','Noto Serif',serif;font-weight:300;font-size:clamp(30px,4vw,46px);line-height:1.05;letter-spacing:-.02em;color:#fff;margin:0}
+.globe-head h2 em{font-style:italic;color:var(--green);font-weight:300}
+.globe-head .globe-meta{color:rgba(255,255,255,.55);font-size:13px;max-width:360px;line-height:1.55;margin:0}
+.globe-stage{position:relative;z-index:1;width:100%;height:clamp(420px,58vw,620px);touch-action:none}
+#sandbox-globe-canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;display:block}
+#sandbox-globe-canvas.grabbing{cursor:grabbing}
+.globe-controls{position:absolute;right:20px;top:20px;z-index:5;display:flex;flex-direction:column;gap:8px}
+.globe-btn{width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);transition:background .15s,border-color .15s,transform .15s}
+.globe-btn:hover{background:rgba(196,69,54,.2);border-color:rgba(196,69,54,.5)}
+.globe-btn:active{transform:scale(.94)}
+.globe-btn .material-symbols-outlined{font-size:20px}
+.globe-legend{position:absolute;left:20px;bottom:20px;z-index:5;display:flex;gap:18px;flex-wrap:wrap;color:rgba(255,255,255,.55);font-size:11.5px;letter-spacing:.02em}
+.globe-legend span{display:inline-flex;align-items:center;gap:8px}
+.globe-legend .dot{width:9px;height:9px;border-radius:999px;display:inline-block;box-shadow:0 0 8px rgba(196,69,54,.4)}
+.globe-legend .dot.cz{background:#e88b6d;box-shadow:0 0 10px rgba(232,139,109,.6)}
+.globe-legend .dot.other{background:#c44536}
+.globe-pop{position:absolute;z-index:6;background:rgba(10,10,10,.92);border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:14px 18px;max-width:260px;color:#fff;backdrop-filter:blur(10px);transform:translate(-50%,-110%);opacity:0;pointer-events:none;transition:opacity .18s ease}
+.globe-pop.open{opacity:1;pointer-events:auto}
+.globe-pop .flag{font-size:18px;margin-bottom:6px;display:inline-block}
+.globe-pop .title{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:20px;line-height:1.1;color:#fff;margin-bottom:4px}
+.globe-pop .kv{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.65);margin-top:8px}
+.globe-pop .kv strong{color:#fff;font-weight:500}
+.globe-pop .body{font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.8);margin-top:8px}
+.globe-pop .closer{position:absolute;top:8px;right:10px;color:rgba(255,255,255,.5);cursor:pointer;font-size:16px;line-height:1;border:0;background:transparent}
+.globe-pop .closer:hover{color:#fff}
+.globe-quick{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:20px 40px 36px;border-top:1px solid rgba(255,255,255,.08);margin-top:4px}
+.globe-quick .q{padding:6px 22px;border-left:1px solid rgba(255,255,255,.08)}
+.globe-quick .q:first-child{border-left:0;padding-left:0}
+.globe-quick .q .k{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:6px}
+.globe-quick .q .v{font-family:'Fraunces','Noto Serif',serif;font-weight:300;font-style:italic;font-size:26px;line-height:1.05;color:#fff;letter-spacing:-.02em}
+@media(max-width:768px){
+  .globe-head{padding:26px 22px 12px}
+  .globe-quick{grid-template-columns:repeat(2,1fr);padding:16px 22px 26px}
+  .globe-quick .q{padding:10px 0;border-left:0;border-top:1px solid rgba(255,255,255,.08)}
+  .globe-quick .q:nth-child(1),.globe-quick .q:nth-child(2){border-top:0}
+  .globe-quick .q:nth-child(2n){padding-left:18px;border-left:1px solid rgba(255,255,255,.08)}
+  .globe-legend{left:14px;bottom:14px;font-size:10.5px;gap:12px}
+  .globe-controls{right:14px;top:14px}
+}
+
 /* Quick Facts strip */
 .qf{background:#1a1a1a;color:#fff;position:relative}
 .qf-inner{max-width:1320px;margin:0 auto;padding:28px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
@@ -251,6 +297,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
       <a href="#typy">Typy</a>
       <a href="#metodika">Metodika</a>
       <a href="#osa">Průběh</a>
+      <a href="#svet">Svět</a>
       <a href="#partneri">Partneři</a>
       <a href="#tym">Tým</a>
       <a href="priklady-ze-zahranici/">Příklady</a>
@@ -856,6 +903,56 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 </div>
 </section>
 
+<!-- ===== GLOBUS — MEZINÁRODNÍ KONTEXT ===== -->
+<section id="svet" class="py-20 md:py-24 px-6 md:px-16 bg-surface">
+<div class="max-w-[1440px] mx-auto">
+<div class="mb-10">
+  <span class="section-num">05 / Mezinárodní kontext</span>
+  <h2 class="font-headline text-4xl md:text-5xl italic"><em style="color:var(--green)">Regulatorní sandboxy</em> ve světě</h2>
+</div>
+
+<div class="globe-wrap">
+  <div class="globe-head">
+    <div>
+      <span class="eyebrow">Mapa zemí s&nbsp;aktivními sandboxy</span>
+      <h2>Od <em>Velké Británie</em> k&nbsp;<em>Česku</em></h2>
+    </div>
+    <p class="globe-meta">Průkopníkem je britská FCA (2016). Dnes regulatorní sandboxy fungují v&nbsp;desítkách zemí — ve finančním sektoru, AI, energetice i&nbsp;sociálních službách. Projekt Vl:Aštovka přivádí tento nástroj do&nbsp;ČR.</p>
+  </div>
+
+  <div class="globe-stage" id="globe-stage">
+    <canvas id="sandbox-globe-canvas"></canvas>
+    <div class="globe-controls" aria-label="Ovládání globusu">
+      <button type="button" class="globe-btn" id="globe-zoom-in" aria-label="Přiblížit"><span class="material-symbols-outlined">add</span></button>
+      <button type="button" class="globe-btn" id="globe-zoom-out" aria-label="Oddálit"><span class="material-symbols-outlined">remove</span></button>
+      <button type="button" class="globe-btn" id="globe-spin" aria-label="Pauza / přehrát rotaci"><span class="material-symbols-outlined">pause</span></button>
+      <button type="button" class="globe-btn" id="globe-reset" aria-label="Reset pohledu"><span class="material-symbols-outlined">my_location</span></button>
+    </div>
+    <div class="globe-legend" aria-hidden="true">
+      <span><span class="dot other"></span> Země s&nbsp;aktivním sandboxem</span>
+      <span><span class="dot cz"></span> Česko (v&nbsp;přípravě)</span>
+    </div>
+    <div class="globe-pop" id="globe-pop" role="dialog" aria-live="polite">
+      <button type="button" class="closer" aria-label="Zavřít">×</button>
+      <span class="flag" id="gp-flag"></span>
+      <div class="title" id="gp-title">—</div>
+      <div class="kv"><strong id="gp-year">—</strong><span id="gp-area">—</span></div>
+      <p class="body" id="gp-body"></p>
+    </div>
+  </div>
+
+  <div class="globe-quick">
+    <div class="q"><div class="k">Zemí</div><div class="v">11</div></div>
+    <div class="q"><div class="k">První sandbox</div><div class="v">2016</div></div>
+    <div class="q"><div class="k">Oblastí</div><div class="v">6+</div></div>
+    <div class="q"><div class="k">ČR</div><div class="v">2026</div></div>
+  </div>
+</div>
+
+<p class="text-xs text-outline mt-4">Přetahováním otáčíš, kolečkem přibližuješ. Klikni na&nbsp;bod pro detail země.</p>
+</div>
+</section>
+
 <!-- ===== PARTNEŘI ===== -->
 <section id="partneri" class="py-20 md:py-24 px-6 md:px-16 bg-surface-container-low">
 <div class="max-w-[1440px] mx-auto">
@@ -863,7 +960,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 <!-- Hlavička sekce (editorial layout) -->
 <div class="editorial-grid mb-12">
 <div class="col-span-12 lg:col-span-5">
-<span class="section-num">05 / Spolupráce</span>
+<span class="section-num">06 / Spolupráce</span>
 <h2 class="font-headline text-4xl md:text-5xl mb-4 italic">Spolupracující <em style="color:var(--green)">instituce</em></h2>
 <p class="text-on-surface-variant text-sm inline-flex items-center gap-2"><span class="material-symbols-outlined text-base text-secondary">touch_app</span> Kliknutím na logo si zobrazíte popis role.</p>
 </div>
@@ -1041,7 +1138,7 @@ Ozvěte se nám
 <section id="tym" class="py-24 md:py-32 px-6 md:px-16 bg-surface border-t border-outline-variant/10">
 <div class="max-w-[1440px] mx-auto">
 <div class="mb-16">
-<span class="section-num">06 / Lidé za projektem</span>
+<span class="section-num">07 / Lidé za projektem</span>
 <h2 class="font-headline text-4xl md:text-5xl mb-4 italic">Náš <em style="color:var(--green)">tým</em></h2>
 <p class="text-on-surface-variant">Realizátor: <a href="https://www.aqe.cz" target="_blank" class="text-primary font-semibold underline">AQE advisors, a.s.</a></p>
 </div>
@@ -1097,7 +1194,7 @@ Ozvěte se nám
 <div class="max-w-[1240px] mx-auto">
 <div class="editorial-grid">
 <div class="col-span-12 lg:col-span-5">
-<span class="section-num" style="color:rgba(255,255,255,.7)">07 / Spolupráce</span>
+<span class="section-num" style="color:rgba(255,255,255,.7)">08 / Kontakt</span>
 <h2 class="font-headline text-4xl md:text-5xl mb-6 italic">Pošlete nám <em style="color:var(--green)">svůj podnět</em></h2>
 <p class="opacity-85 leading-relaxed mb-8">Máte nápad na využití regulačního prostředí? Chcete se zapojit? Máte zkušenost ze&nbsp;zahraničí? Každý podnět pečlivě vyhodnotíme.</p>
 <div class="space-y-4 text-sm mb-12">
@@ -1373,6 +1470,87 @@ Odeslat podnět
   }
   tick();
   setInterval(tick, 60000); // update jednou za minutu (stačí pro dny/hodiny)
+})();
+</script>
+<!-- Sandbox Globe -->
+<script src="js/sandbox-globe.js"></script>
+<script>
+(function(){
+  var canvas = document.getElementById('sandbox-globe-canvas');
+  if(!canvas || typeof window.SandboxGlobe !== 'function') return;
+
+  // ===== Data: země s aktivním sandboxem =====
+  // lon, lat = zeměpisné souřadnice hlavního města / regulátora
+  var COUNTRIES = [
+    { code:'GB', flag:'🇬🇧', name:'Velká Británie',  lon: -0.13, lat: 51.51, year:'2016', area:'Finanční služby',  body:'FCA — první regulatorní sandbox na světě. Inspirace pro desítky jurisdikcí.' },
+    { code:'SG', flag:'🇸🇬', name:'Singapur',        lon:103.85, lat:  1.29, year:'2016', area:'FinTech / AI',     body:'MAS FinTech Regulatory Sandbox. Jeden z nejzralejších režimů v Asii.' },
+    { code:'AU', flag:'🇦🇺', name:'Austrálie',       lon:149.13, lat:-35.28, year:'2016', area:'Finanční služby',  body:'ASIC sandbox pro FinTech firmy, následně rozšířen o průmyslové piloty.' },
+    { code:'NL', flag:'🇳🇱', name:'Nizozemsko',      lon:  4.90, lat: 52.37, year:'2017', area:'Energetika',       body:'Experimenteerregeling — sandbox pro decentralizovanou energetiku a smart grids.' },
+    { code:'DE', flag:'🇩🇪', name:'Německo',         lon: 13.40, lat: 52.52, year:'2019', area:'Energetika / AI',  body:'Reallabore — státem podporované reálné laboratoře v energetice, mobilitě, zdravotnictví.' },
+    { code:'LT', flag:'🇱🇹', name:'Litva',           lon: 25.28, lat: 54.69, year:'2018', area:'FinTech',          body:'Bank of Lithuania Sandbox — testování inovací pod dohledem národní banky.' },
+    { code:'JP', flag:'🇯🇵', name:'Japonsko',        lon:139.69, lat: 35.69, year:'2018', area:'Průřezově',        body:'Regulatory Sandbox System — plošný sandbox napříč sektory, koordinace z kabinetu premiéra.' },
+    { code:'KR', flag:'🇰🇷', name:'Jižní Korea',     lon:126.98, lat: 37.57, year:'2019', area:'ICT / mobilita',   body:'ICT Regulatory Sandbox — flexibilní testování digitálních služeb a smart-city technologií.' },
+    { code:'FR', flag:'🇫🇷', name:'Francie',         lon:  2.35, lat: 48.85, year:'2019', area:'Energetika',       body:'Expérimentation réglementaire CRE — sandbox pro nová energetická schémata a samospotřebu.' },
+    { code:'ES', flag:'🇪🇸', name:'Španělsko',       lon: -3.70, lat: 40.42, year:'2020', area:'FinTech',          body:'Sandbox financiero — první evropský FinTech sandbox s plnou legislativní oporou.' },
+    { code:'CZ', flag:'🇨🇿', name:'Česko',           lon: 14.42, lat: 50.08, year:'2026', area:'Vl:Aštovka',       body:'Projekt Vl:Aštovka — příprava legislativního rámce a pilotní území Aš. Start 2026.' }
+  ];
+
+  // Trasy — great-circle arc od UK (průkopník) ke všem ostatním
+  var UK = [-0.13, 51.51];
+  var ROUTES = COUNTRIES
+    .filter(function(c){ return c.code !== 'GB'; })
+    .map(function(c){ return { a: UK, b: [c.lon, c.lat], from:'GB', to: c.code }; });
+
+  // Init globus
+  var pop = document.getElementById('globe-pop');
+  var stage = document.getElementById('globe-stage');
+
+  function openPop(m, pt){
+    document.getElementById('gp-flag').textContent  = m.flag || '';
+    document.getElementById('gp-title').textContent = m.name;
+    document.getElementById('gp-year').textContent  = m.year;
+    document.getElementById('gp-area').textContent  = m.area ? '· ' + m.area : '';
+    document.getElementById('gp-body').textContent  = m.body || '';
+    // Position near click point but within stage
+    var stageRect = stage.getBoundingClientRect();
+    var x = Math.max(140, Math.min(stageRect.width - 20, pt.x));
+    var y = Math.max(90, pt.y - 12);
+    pop.style.left = x + 'px';
+    pop.style.top  = y + 'px';
+    pop.classList.add('open');
+  }
+  function closePop(){ pop.classList.remove('open'); }
+
+  var globe = new window.SandboxGlobe(canvas, {
+    onClickMarker: openPop,
+    onClickEmpty: closePop
+  });
+  globe.setMarkers(COUNTRIES);
+  globe.setRoutes(ROUTES);
+
+  // Controls
+  var spinBtn = document.getElementById('globe-spin');
+  var spinning = true;
+  spinBtn.addEventListener('click', function(){
+    spinning = !spinning;
+    globe.setSpin(spinning);
+    var ic = spinBtn.querySelector('.material-symbols-outlined');
+    if(ic) ic.textContent = spinning ? 'pause' : 'play_arrow';
+  });
+  document.getElementById('globe-zoom-in').addEventListener('click', function(){ globe.zoomIn(); });
+  document.getElementById('globe-zoom-out').addEventListener('click', function(){ globe.zoomOut(); });
+  document.getElementById('globe-reset').addEventListener('click', function(){
+    globe.reset(); closePop();
+    spinning = true;
+    var ic = spinBtn.querySelector('.material-symbols-outlined');
+    if(ic) ic.textContent = 'pause';
+  });
+  pop.querySelector('.closer').addEventListener('click', closePop);
+
+  // ESC closes popover
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closePop();
+  });
 })();
 </script>
 <script src="js/main.js"></script>
