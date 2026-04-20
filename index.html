@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Regulatorní sandboxy (regulační prostředí) v ČR | AQE advisors</title>
-<meta name="description" content="Regulatorní sandboxy v ČR — bezpečné testování inovací pod dohledem státu. Metodika, legislativa a příklady ze zahraničí. Poradenství a spolupráce od AQE advisors."/>
+<title>Regulatorní sandboxy (regulační prostředí) v ČR | AQE advisors, a.s.</title>
+<meta name="description" content="Regulatorní sandboxy v ČR — bezpečné testování inovací pod dohledem státu. Metodika, legislativa a příklady ze zahraničí. Poradenství a spolupráce od AQE advisors, a.s."/>
 <meta name="theme-color" content="#2a2a2a"/>
 <link rel="canonical" href="https://regulatornisandboxy.cz/"/>
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="cs_CZ"/>
 <meta property="og:title" content="Regulatorní sandboxy v ČR"/>
-<meta property="og:description" content="Regulatorní sandboxy — bezpečné testování inovací pod dohledem státu. AQE advisors."/>
+<meta property="og:description" content="Regulatorní sandboxy — bezpečné testování inovací pod dohledem státu. AQE advisors, a.s."/>
 <meta property="og:url" content="https://regulatornisandboxy.cz/"/>
 <meta property="og:site_name" content="Regulatorní sandboxy"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -231,28 +231,40 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   .globe-controls{right:12px;top:12px}
 }
 
-/* Quick Facts strip */
-.qf{background:#1a1a1a;color:#fff;position:relative}
-.qf-inner{max-width:1320px;margin:0 auto;padding:28px 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.qf-item{padding:6px 28px;border-left:1px solid rgba(255,255,255,.12)}
-.qf-item:first-child{border-left:0;padding-left:0}
-.qf-item .k{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:8px}
-.qf-item .v{font-family:'Fraunces','Noto Serif',Georgia,serif;font-weight:300;font-style:italic;font-size:28px;line-height:1.05;color:#fff;letter-spacing:-.02em}
-.qf-item .v strong{font-weight:500;font-style:normal;font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-.01em}
-.qf-item .d{font-size:12.5px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.45}
-.qf-count{display:inline-flex;align-items:baseline;gap:6px;font-family:'JetBrains Mono',monospace;color:#fff;font-size:22px;font-weight:500;letter-spacing:-.02em}
-.qf-count span{display:inline-block}
-.qf-count .sep{color:rgba(255,255,255,.3);font-weight:300;padding:0 2px}
-.qf-count .u{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-left:2px}
-@media(max-width:900px){.qf-inner{grid-template-columns:repeat(2,1fr);gap:4px}.qf-item{border-left:0;border-top:1px solid rgba(255,255,255,.12);padding:18px 0}.qf-item:nth-child(1),.qf-item:nth-child(2){border-top:0}.qf-item:nth-child(2n){padding-left:24px;border-left:1px solid rgba(255,255,255,.12)}}
+/* Kontaktní strip — místo Quick Facts, pod hero sekcí */
+.contact-strip{background:#1a1a1a;color:#fff;position:relative;overflow:hidden}
+.contact-strip::before{content:'';position:absolute;top:-40%;right:-15%;width:55%;height:180%;background:radial-gradient(ellipse at center,rgba(196,69,54,.16) 0%,transparent 60%);pointer-events:none}
+.contact-strip__inner{position:relative;max-width:1320px;margin:0 auto;padding:44px 32px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.contact-strip__left{max-width:520px}
+.cs-eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:10px;display:block}
+.cs-title{font-family:'Fraunces','Noto Serif',Georgia,serif;font-weight:300;font-size:clamp(26px,3vw,40px);line-height:1.05;letter-spacing:-.02em;color:#fff;margin:0 0 14px}
+.cs-title em{font-style:italic;color:var(--green);font-weight:300}
+.cs-lead{font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.75);margin:0}
+.contact-strip__right{display:flex;flex-direction:column;gap:18px}
+.cs-contacts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cs-contact{display:flex;flex-direction:column;padding:14px 16px;border:1px solid rgba(255,255,255,.14);border-radius:6px;text-decoration:none;transition:border-color .2s,background .2s;background:rgba(255,255,255,.02)}
+.cs-contact:hover{border-color:rgba(196,69,54,.6);background:rgba(196,69,54,.06)}
+.cs-contact .cs-name{font-family:'Fraunces','Noto Serif',serif;font-style:italic;font-weight:400;font-size:18px;color:#fff;line-height:1.1;margin-bottom:2px}
+.cs-contact .cs-role{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:8px}
+.cs-contact .cs-mail{font-size:12.5px;color:var(--green);font-weight:500;font-family:'JetBrains Mono',monospace;letter-spacing:-.01em;word-break:break-all}
+.cs-contact:hover .cs-mail{color:#e88b6d}
+.cs-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;background:var(--green);color:#fff;border-radius:4px;text-decoration:none;font-weight:600;font-size:14.5px;letter-spacing:.01em;transition:background .2s;align-self:flex-start}
+.cs-cta:hover{background:var(--green-dark)}
+.cs-cta .material-symbols-outlined{font-size:19px}
+.cs-cta-arrow{transition:transform .2s}
+.cs-cta:hover .cs-cta-arrow{transform:translateX(3px)}
+@media(max-width:900px){
+  .contact-strip__inner{grid-template-columns:1fr;gap:28px;padding:36px 24px}
+  .cs-contacts{grid-template-columns:1fr}
+}
 .serif-it{font-family:var(--serif);font-weight:300;font-style:italic;letter-spacing:-.02em}
 .site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:background .3s,padding .3s,box-shadow .3s}
 .site-header.scrolled{background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);box-shadow:0 1px 0 var(--line);padding:12px 0}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;max-width:1240px;margin:0 auto;padding:0 32px}
-.brand{flex-shrink:0;display:inline-flex;align-items:center;gap:14px;text-decoration:none}
-.brand-logo{height:30px;width:auto;display:block;background:#fff;padding:4px 8px;border-radius:3px;transition:background .3s,padding .3s}
-.site-header.scrolled .brand-logo{background:transparent;padding:0}
-.brand-divider{width:1px;height:20px;background:rgba(255,255,255,.3);transition:background .3s}
+.brand{flex-shrink:0;display:inline-flex;align-items:center;gap:16px;text-decoration:none}
+.brand-logo{height:44px;width:auto;display:block;filter:brightness(0) invert(1);transition:filter .3s,height .3s}
+.site-header.scrolled .brand-logo{filter:none;height:38px}
+.brand-divider{width:1px;height:26px;background:rgba(255,255,255,.35);transition:background .3s}
 .site-header.scrolled .brand-divider{background:rgba(26,26,26,.2)}
 .brand-mark{font-weight:600;font-size:15px;letter-spacing:-.005em;color:#fff;transition:color .3s;line-height:1.15}
 .brand-mark small{display:block;font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-top:1px}
@@ -305,7 +317,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <a href="#top" class="brand" aria-label="AQE advisors — Regulatorní sandboxy">
+    <a href="#top" class="brand" aria-label="AQE advisors, a.s. — Regulatorní sandboxy">
       <img src="img/logo-aqe-black.png" alt="AQE advisors" class="brand-logo"/>
       <span class="brand-divider" aria-hidden="true"></span>
       <span class="brand-mark">Regulatorní sandboxy<small>Metodika &amp; poradenství</small></span>
@@ -334,7 +346,7 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="hero-inner">
-    <span class="hero-eyebrow">AQE advisors · Regulatorní prostředí</span>
+    <span class="hero-eyebrow">AQE advisors, a.s. · Regulatorní prostředí</span>
     <h1 class="hero-title hero-title--animated">
       <span class="hw serif-it">Regulatorní</span> <span class="hw serif-it">sandboxy</span><br>
       <span class="hw">neboli</span> <span class="hw">regulační</span> <span class="hw">prostředí</span>
@@ -350,30 +362,32 @@ details[open] .acc-arrow{transform:rotate(180deg)}
   </div>
 </section>
 
-<!-- ===== QUICK FACTS STRIP ===== -->
-<section class="qf" aria-label="Projekt v číslech">
-  <div class="qf-inner">
-    <div class="qf-item">
-      <div class="k">Zákon</div>
-      <div class="v"><strong class="stat-num" data-count="328">0</strong>/<span class="stat-num" data-count="2025">0</span> Sb.</div>
-      <div class="d">Kontrolované testovací prostředí v&nbsp;ČR</div>
+<!-- ===== KONTAKTNÍ STRIP ===== -->
+<section class="contact-strip" aria-label="Nabídka spolupráce">
+  <div class="contact-strip__inner">
+    <div class="contact-strip__left">
+      <span class="cs-eyebrow">Spolupráce</span>
+      <h2 class="cs-title"><em>Zvažujete</em> regulatorní sandbox?</h2>
+      <p class="cs-lead">Pomáháme ministerstvům, regulátorům, samosprávám i&nbsp;inovačním aktérům navrhnout a&nbsp;nastavit kontrolované testovací prostředí. Od&nbsp;metodiky přes legislativní rámec až po&nbsp;pilotní ověření.</p>
     </div>
-    <div class="qf-item">
-      <div class="k">Resortů</div>
-      <div class="v"><strong class="stat-num" data-count="14">0</strong> <em>+ <span class="stat-num" data-count="17">0</span></em></div>
-      <div class="d">Ministerstev a&nbsp;dalších ústředních orgánů</div>
-    </div>
-    <div class="qf-item">
-      <div class="k">Zákonů v DEPO II</div>
-      <div class="v"><strong class="stat-num" data-count="70">0</strong><em>+</em></div>
-      <div class="d">Složkových zákonů k&nbsp;novelizaci</div>
-    </div>
-    <div class="qf-item">
-      <div class="k">Do deadline EU</div>
-      <div class="qf-count" id="qf-countdown" aria-live="polite">
-        <span data-u="d">—</span><span class="u">dní</span><span class="sep">·</span><span data-u="h">—</span><span class="u">h</span>
+    <div class="contact-strip__right">
+      <div class="cs-contacts">
+        <a href="mailto:pavelka@AQE.cz" class="cs-contact">
+          <span class="cs-name">Jan Pavelka</span>
+          <span class="cs-role">Vedoucí projektu</span>
+          <span class="cs-mail">pavelka@AQE.cz</span>
+        </a>
+        <a href="mailto:havranek@AQE.cz" class="cs-contact">
+          <span class="cs-name">Jan Havránek</span>
+          <span class="cs-role">Ředitel AQE advisors</span>
+          <span class="cs-mail">havranek@AQE.cz</span>
+        </a>
       </div>
-      <div class="d">AI Act, čl. 57 · <strong style="color:#fff">2. srpna 2026</strong></div>
+      <a href="#kontakt" class="cs-cta">
+        <span class="material-symbols-outlined">mail</span>
+        Napsat podnět
+        <span class="material-symbols-outlined cs-cta-arrow">arrow_forward</span>
+      </a>
     </div>
   </div>
 </section>
@@ -791,7 +805,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
     <h2 class="font-headline text-4xl md:text-5xl italic leading-[1.05]"><em style="color:var(--green)">Regulatorní sandboxy</em> ve světě</h2>
   </div>
   <div class="lg:col-span-5 lg:col-start-8">
-    <p class="text-on-surface-variant leading-relaxed">Průkopníkem je britská FCA (2016). Dnes regulatorní sandboxy fungují v&nbsp;desítkách zemí — ve&nbsp;finančním sektoru, energetice, sociální politice i&nbsp;dopravě. AQE advisors přivádí tento nástroj do&nbsp;ČR a&nbsp;pomáhá státu i&nbsp;samosprávám s&nbsp;jeho nastavením.</p>
+    <p class="text-on-surface-variant leading-relaxed">Průkopníkem je britská FCA (2016). Dnes regulatorní sandboxy fungují v&nbsp;desítkách zemí — ve&nbsp;finančním sektoru, energetice, sociální politice i&nbsp;dopravě. AQE advisors, a.s. přivádí tento nástroj do&nbsp;ČR a&nbsp;pomáhá státu i&nbsp;samosprávám s&nbsp;jeho nastavením.</p>
     <a href="priklady-ze-zahranici/" class="inline-flex items-center gap-1 mt-3 text-sm font-semibold text-primary hover:underline">Všechny příklady <span class="material-symbols-outlined text-base">arrow_forward</span></a>
   </div>
 </div>
@@ -1005,7 +1019,7 @@ Zákon 328/2025 Sb. definuje regulační prostředí takto: „Projekt kontrolov
 <p class="opacity-85 leading-relaxed max-w-2xl">Hledáme další ministerstva, regulátory, inovační aktéry a&nbsp;samosprávy pro budování sítě sandboxů v&nbsp;ČR. Rádi se s&nbsp;vámi potkáme a&nbsp;probereme možnosti spolupráce.</p>
 </div>
 </div>
-<a href="#kontakt" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-secondary-fixed-dim text-primary font-semibold hover:bg-white transition-colors whitespace-nowrap flex-shrink-0">
+<a href="#kontakt" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors whitespace-nowrap flex-shrink-0">
 <span class="material-symbols-outlined text-base">mail</span>
 Ozvěte se nám
 </a>
@@ -1019,7 +1033,7 @@ Ozvěte se nám
 <div class="mb-16">
 <span class="section-num">07 / Lidé za projektem</span>
 <h2 class="font-headline text-4xl md:text-5xl mb-4 italic">Náš <em style="color:var(--green)">tým</em></h2>
-<p class="text-on-surface-variant">Realizátor: <a href="https://www.aqe.cz" target="_blank" class="text-primary font-semibold underline">AQE advisors, a.&nbsp;s.</a></p>
+<p class="text-on-surface-variant">Realizátor: <a href="https://www.aqe.cz" target="_blank" class="text-primary font-semibold underline">AQE advisors, a.s.</a></p>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -1036,7 +1050,7 @@ Ozvěte se nám
   <div class="team-text">
     <h4 class="team-name">Jan Havránek</h4>
     <p class="team-role">Strategický rozvoj</p>
-    <p class="team-bio">Působí jako ředitel AQE advisors a&nbsp;specialista na strategický rozvoj ve&nbsp;veřejné správě. Více než dvě dekády se věnuje propojování inovací s&nbsp;regulatorním prostředím — od&nbsp;řízení strukturálních fondů na&nbsp;MPSV a&nbsp;Ministerstvu vnitra přes poradenství pro TA&nbsp;ČR až po rozvoj nástrojů pro efektivní správu měst a&nbsp;obcí. Ph.D. získal na&nbsp;Mendelově univerzitě v&nbsp;Brně za&nbsp;výzkum zaměřený na zefektivnění řízení organizací veřejné správy. Odpovídá za&nbsp;strategický rozvoj a&nbsp;propojení metodiky regulačních prostředí s&nbsp;českou institucionální praxí.</p>
+    <p class="team-bio">Působí jako ředitel AQE advisors, a.s. a&nbsp;specialista na strategický rozvoj ve&nbsp;veřejné správě. Více než dvě dekády se věnuje propojování inovací s&nbsp;regulatorním prostředím — od&nbsp;řízení strukturálních fondů na&nbsp;MPSV a&nbsp;Ministerstvu vnitra přes poradenství pro TA&nbsp;ČR až po rozvoj nástrojů pro efektivní správu měst a&nbsp;obcí. Ph.D. získal na&nbsp;Mendelově univerzitě v&nbsp;Brně za&nbsp;výzkum zaměřený na zefektivnění řízení organizací veřejné správy. Odpovídá za&nbsp;strategický rozvoj a&nbsp;propojení metodiky regulačních prostředí s&nbsp;českou institucionální praxí.</p>
   </div>
   <div class="team-photo-wrap"><img src="img/team/havranek.jpg" alt="Jan Havránek" onerror="this.style.display='none'"></div>
 </article>
@@ -1101,12 +1115,12 @@ Ozvěte se nám
 <li class="bg-white/5 rounded-xl p-5 border border-white/10">
 <div class="font-bold">Jan Havránek</div>
 <div class="text-xs opacity-70 mb-2">Strategický rozvoj</div>
-<a href="mailto:havranek@aqe.cz" class="text-secondary-fixed-dim hover:underline text-sm break-all">havranek@aqe.cz</a>
+<a href="mailto:havranek@AQE.cz" class="text-secondary-fixed-dim hover:underline text-sm break-all">havranek@AQE.cz</a>
 </li>
 <li class="bg-white/5 rounded-xl p-5 border border-white/10">
 <div class="font-bold">Jan Pavelka</div>
 <div class="text-xs opacity-70 mb-2">Vedoucí projektu</div>
-<a href="mailto:pavelka@aqe.cz" class="text-secondary-fixed-dim hover:underline text-sm break-all">pavelka@aqe.cz</a>
+<a href="mailto:pavelka@AQE.cz" class="text-secondary-fixed-dim hover:underline text-sm break-all">pavelka@AQE.cz</a>
 </li>
 <li class="bg-white/5 rounded-xl p-5 border border-white/10">
 <div class="font-bold">Daniel Bečvář</div>
@@ -1122,7 +1136,7 @@ Ozvěte se nám
 </div>
 <div class="col-span-12 lg:col-span-7 lg:pl-12 flex flex-col">
 <!-- Formulář -->
-<form action="mailto:pavelka@aqe.cz" method="post" enctype="text/plain" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
+<form action="mailto:pavelka@AQE.cz" method="post" enctype="text/plain" class="reveal bg-white/5 rounded-xl p-6 md:p-8 border border-white/10 gap-5 flex flex-col flex-1 h-full">
 <div>
 <label for="f-category" class="block text-xs uppercase tracking-widest opacity-70 mb-2 font-semibold">Kategorie podnětu</label>
 <select id="f-category" name="Kategorie" required class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-on-primary focus:outline-none focus:border-secondary-fixed-dim">
@@ -1155,7 +1169,7 @@ Ozvěte se nám
 <input id="f-gdpr" type="checkbox" required class="mt-0.5"/>
 <label for="f-gdpr">Souhlasím se&nbsp;zpracováním osobních údajů pro účely vyřízení dotazu.</label>
 </div>
-<button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary-fixed-dim text-primary font-semibold hover:bg-white transition-colors">
+<button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-secondary text-white font-semibold hover:bg-secondary-fixed-dim transition-colors">
 <span class="material-symbols-outlined text-base">send</span>
 Odeslat podnět
 </button>
@@ -1177,7 +1191,7 @@ Odeslat podnět
     <div>
       <div class="font-headline italic text-xl text-primary mb-4">regulatornisandboxy.cz</div>
       <p class="text-on-surface-variant leading-relaxed mb-4 text-[13.5px]">Poradenství a&nbsp;metodická podpora pro regulatorní sandboxy v&nbsp;ČR. Pomáháme ministerstvům, regulátorům i&nbsp;samosprávám zavést bezpečné prostředí pro testování inovací.</p>
-      <p class="text-xs text-outline leading-relaxed">Web provozuje <strong class="text-primary">AQE advisors, a.&nbsp;s.</strong><br>Příklady konkrétních projektů najdete na&nbsp;stránce <a href="priklady-ze-zahranici/" class="underline hover:text-primary">Příklady ze zahraničí</a>.</p>
+      <p class="text-xs text-outline leading-relaxed">Web provozuje <strong class="text-primary">AQE advisors, a.s.</strong><br>Příklady konkrétních projektů najdete na&nbsp;stránce <a href="priklady-ze-zahranici/" class="underline hover:text-primary">Příklady ze zahraničí</a>.</p>
     </div>
 
     <!-- 2. Obsah -->
@@ -1198,7 +1212,7 @@ Odeslat podnět
     <!-- 3. O realizátorovi -->
     <div>
       <h3 class="font-semibold text-primary text-xs uppercase tracking-widest mb-4">Realizátor</h3>
-      <p class="mb-2"><a href="https://www.aqe.cz" target="_blank" rel="noopener" class="text-primary font-semibold hover:underline">AQE advisors, a.&nbsp;s.</a></p>
+      <p class="mb-2"><a href="https://www.aqe.cz" target="_blank" rel="noopener" class="text-primary font-semibold hover:underline">AQE advisors, a.s.</a></p>
       <address class="not-italic text-on-surface-variant text-[13.5px] leading-relaxed">
         <!-- TODO: Doplnit oficiální adresu sídla -->
         Třída Kpt. Jaroše 1922/3<br>
@@ -1216,8 +1230,8 @@ Odeslat podnět
         Pošlete podnět
       </a>
       <ul class="space-y-2 text-[13px]">
-        <li><a href="mailto:pavelka@aqe.cz" class="text-on-surface-variant hover:text-primary transition-colors break-all">pavelka@aqe.cz</a></li>
-        <li><a href="mailto:havranek@aqe.cz" class="text-on-surface-variant hover:text-primary transition-colors break-all">havranek@aqe.cz</a></li>
+        <li><a href="mailto:pavelka@AQE.cz" class="text-on-surface-variant hover:text-primary transition-colors break-all">pavelka@AQE.cz</a></li>
+        <li><a href="mailto:havranek@AQE.cz" class="text-on-surface-variant hover:text-primary transition-colors break-all">havranek@AQE.cz</a></li>
       </ul>
     </div>
 
@@ -1226,7 +1240,7 @@ Odeslat podnět
   <!-- Spodní pás: copyright + legal -->
   <div class="border-t border-outline-variant/20 bg-[#ddd9d3]">
     <div class="max-w-[1240px] mx-auto px-6 md:px-12 py-5 flex flex-col md:flex-row gap-3 justify-between items-start md:items-center text-xs text-outline">
-      <p>© <span id="footer-year">2026</span> AQE advisors, a.&nbsp;s. · Všechna práva vyhrazena.</p>
+      <p>© <span id="footer-year">2026</span> AQE advisors, a.s. · Všechna práva vyhrazena.</p>
       <nav aria-label="Právní informace" class="flex gap-5 flex-wrap">
         <a class="hover:text-primary transition-colors" href="ochrana-osobnich-udaju/">Ochrana osobních údajů</a>
         <a class="hover:text-primary transition-colors" href="cookies/">Cookies</a>
@@ -1268,7 +1282,7 @@ Odeslat podnět
     </div>
     <div class="flex gap-2 flex-wrap">
       <button id="cookie-reject" class="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-sm font-semibold transition-colors">Odmítnout</button>
-      <button id="cookie-accept" class="px-5 py-2.5 rounded-lg bg-secondary-fixed-dim text-primary hover:bg-white text-sm font-semibold transition-colors">Souhlasím</button>
+      <button id="cookie-accept" class="px-5 py-2.5 rounded-lg bg-secondary text-white hover:bg-secondary-fixed-dim text-sm font-semibold transition-colors">Souhlasím</button>
     </div>
   </div>
 </div>
@@ -1311,27 +1325,6 @@ Odeslat podnět
 })();
 </script>
 
-<!-- Countdown do AI Act deadline -->
-<script>
-(function(){
-  var target = new Date('2026-08-02T00:00:00+02:00').getTime();
-  var root = document.getElementById('qf-countdown');
-  if(!root) return;
-  var ns = root.querySelectorAll('span[data-u]');
-  function tick(){
-    var diff = Math.max(0, target - Date.now());
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var map = {d:d, h:h};
-    ns.forEach(function(el){
-      var v = map[el.dataset.u];
-      el.textContent = v;
-    });
-  }
-  tick();
-  setInterval(tick, 60000); // update jednou za minutu (stačí pro dny/hodiny)
-})();
-</script>
 <!-- Sandbox Globe -->
 <script src="js/sandbox-globe.js"></script>
 <script>
@@ -1353,7 +1346,7 @@ Odeslat podnět
     { code:'NL', name:'Nizozemsko',     lon:  4.90, lat: 52.37, year:'—',       area:'Sociální politika',     body:'Zákon o nezaměstnanosti umožňuje experimenty s aktivací uchazečů. Participační zákon dovoluje obcím testovat různé formy sociálních dávek. Klíčová inspirace pro sociální sandboxy v ČR.' },
     { code:'SG', name:'Singapur',       lon:103.85, lat:  1.29, year:'2018–2021', area:'Zdravotnictví · Telemedicína', body:'V regulačním sandboxu byla testována telemedicína; závěry se promítly do regulace. V roce 2024 spustilo ministerstvo zdravotnictví průběžný sandbox pro další zdravotnické inovace.' },
     { code:'JP', name:'Japonsko',       lon:139.69, lat: 35.69, year:'—',       area:'Všechny oblasti',       body:'Vládní sandboxový přístup otevřený i nejaponským společnostem napříč odvětvími. Jednotné kontaktní místo pro žadatele, zaměření na byznys a technologie.' },
-    { code:'CZ', name:'Česko',          lon: 14.42, lat: 50.08, year:'2025–2027', area:'Sociální politika',   body:'AQE advisors připravuje metodiku pro regulační prostředí v sociální politice s pilotním ověřením na Ašsku. Zaměření na mezigenerační chudobu.' }
+    { code:'CZ', name:'Česko',          lon: 14.42, lat: 50.08, year:'2025–2027', area:'Sociální politika',   body:'AQE advisors, a.s. připravuje metodiku pro regulační prostředí v sociální politice s pilotním ověřením na Ašsku. Zaměření na mezigenerační chudobu.' }
   ];
 
   // Trasy — great-circle arc od UK (průkopník) ke všem ostatním
